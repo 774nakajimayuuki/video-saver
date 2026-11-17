@@ -37,16 +37,20 @@ final class AudioFileWriter {
     private let lock = NSLock()
     private var sessionStarted = false
 
-    init(url: URL, title: String = "") throws {
+    init(url: URL, title: String = "", artist: String = "") throws {
         self.url = url
         writer = try AVAssetWriter(outputURL: url, fileType: .m4a)
-        if !title.isEmpty {
-            let item = AVMutableMetadataItem()
-            item.identifier = .iTunesMetadataSongName
-            item.dataType = kCMMetadataBaseDataType_UTF8 as String
-            item.value = title as NSString
-            writer.metadata = [item]
+        func item(_ id: AVMetadataIdentifier, _ value: String) -> AVMutableMetadataItem {
+            let m = AVMutableMetadataItem()
+            m.identifier = id
+            m.dataType = kCMMetadataBaseDataType_UTF8 as String
+            m.value = value as NSString
+            return m
         }
+        var tags: [AVMetadataItem] = []
+        if !title.isEmpty { tags.append(item(.iTunesMetadataSongName, title)) }
+        if !artist.isEmpty { tags.append(item(.iTunesMetadataArtist, artist)) }
+        if !tags.isEmpty { writer.metadata = tags }
         input = AVAssetWriterInput(mediaType: .audio, outputSettings: [
             AVFormatIDKey: kAudioFormatMPEG4AAC,
             AVSampleRateKey: 48_000,
@@ -117,6 +121,7 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
     @Published var apps: [RecordableApp] = []
     @Published var selectedApp = ""   // 空文字 = システム全体の音声
     @Published var recording = false
+    @Published var selfAudio = false   // true = このアプリ内ブラウザの音を録音中
     @Published var elapsed: TimeInterval = 0
     @Published var status = "録音する音声を選んで「録音開始」を押してください"
     @Published var lastFile: URL?
@@ -147,12 +152,13 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
         }
     }
 
-    func start(folder: URL, title: String) {
+    /// selfAudio が true のときは、このアプリ内ブラウザが出している音だけを録る（他のアプリの音は入らない）。
+    func start(folder: URL, title: String, artist: String = "", selfAudio: Bool = false) {
         guard !recording, !working else { return }
         working = true
         Task {
             defer { working = false }
-            await begin(folder: folder, title: title)
+            await begin(folder: folder, title: title, artist: artist, selfAudio: selfAudio)
         }
     }
 
@@ -165,14 +171,19 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
         }
     }
 
-    private func begin(folder: URL, title rawTitle: String) async {
+    private func begin(folder: URL, title rawTitle: String, artist: String, selfAudio: Bool) async {
         var file: AudioFileWriter?
         do {
             if !CGPreflightScreenCaptureAccess() { _ = CGRequestScreenCaptureAccess() }
             let content = try await SCShareableContent.excludingDesktopWindows(false, onScreenWindowsOnly: false)
             guard let display = content.displays.first else { throw AudioRecorderError.noDisplay }
             let filter: SCContentFilter
-            if selectedApp.isEmpty {
+            if selfAudio {
+                guard let me = content.applications.first(where: { $0.bundleIdentifier == Bundle.main.bundleIdentifier }) else {
+                    throw AudioRecorderError.appGone
+                }
+                filter = SCContentFilter(display: display, including: [me], exceptingWindows: [])
+            } else if selectedApp.isEmpty {
                 filter = SCContentFilter(display: display, excludingApplications: [], exceptingWindows: [])
             } else if let app = content.applications.first(where: { $0.bundleIdentifier == selectedApp }) {
                 filter = SCContentFilter(display: display, including: [app], exceptingWindows: [])
@@ -182,7 +193,7 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
 
             let config = SCStreamConfiguration()
             config.capturesAudio = true
-            config.excludesCurrentProcessAudio = true
+            config.excludesCurrentProcessAudio = !selfAudio
             config.sampleRate = 48_000
             config.channelCount = 2
             // 映像は使わない。最小サイズ・低フレームレートにして負荷を抑える。
@@ -191,7 +202,8 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
             config.minimumFrameInterval = CMTime(value: 1, timescale: 1)
 
             let title = Self.cleanTitle(rawTitle)
-            let writer = try AudioFileWriter(url: Self.uniqueURL(in: folder, title: title), title: title)
+            let writer = try AudioFileWriter(url: Self.uniqueURL(in: folder, title: title), title: title,
+                                             artist: Self.cleanTitle(artist))
             file = writer
             let capture = AudioCapture(writer: writer) { [weak self] error in
                 Task { @MainActor in
@@ -212,6 +224,7 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
             startedAt = Date()
             elapsed = 0
             recording = true
+            self.selfAudio = selfAudio
             status = "録音中…（録音中は画面を自動でスリープさせません）"
             // 画面が消えると ScreenCaptureKit の取得が止まるため、録音中だけスリープを防ぐ。
             sleepActivity = ProcessInfo.processInfo.beginActivity(
@@ -234,6 +247,7 @@ final class AudioCapture: NSObject, SCStreamOutput, SCStreamDelegate {
         let stream = self.stream, writer = self.writer
         self.stream = nil; self.capture = nil; self.writer = nil
         recording = false
+        selfAudio = false
         if reason == nil { try? await stream?.stopCapture() }
         let error = await writer?.finish()
         if let error {

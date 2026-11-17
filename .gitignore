@@ -18,6 +18,7 @@ node_modules/
 
 # Locally supplied binaries and source archives
 /yt-dlp
+/tools/
 /exports/
 
 # Local credentials and browser/session data

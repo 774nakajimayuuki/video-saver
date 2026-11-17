@@ -35,7 +35,7 @@ import AppKit
         guard FileManager.default.isExecutableFile(atPath: executable.path) else {
             status = "保存エンジンが見つかりません。アプリを再ビルドしてください。"; return
         }
-        guard let ffmpeg = ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg"].first(where: { FileManager.default.isExecutableFile(atPath: $0) }),
+        guard let ffmpeg = [Bundle.main.bundleURL.appendingPathComponent("Contents/Helpers/ffmpeg").path, "/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg"].first(where: { FileManager.default.isExecutableFile(atPath: $0) }),
               FileManager.default.isExecutableFile(atPath: URL(fileURLWithPath: ffmpeg).deletingLastPathComponent().appendingPathComponent("ffprobe").path) else {
             status = "MP4 保存に必要な ffmpeg / ffprobe が見つかりません。"; return
         }
@@ -110,6 +110,7 @@ import AppKit
         job.arguments = args
         var env = ProcessInfo.processInfo.environment
         env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+        env["SSL_CERT_FILE"] = "/etc/ssl/cert.pem"
         job.environment = env
         let pipe = Pipe()
         job.standardOutput = pipe
@@ -154,51 +155,91 @@ import AppKit
     func cancel() { cancelled = true; process?.interrupt() }
 }
 
+/// 画面全体。状態はここで持ち、タブを切り替えても保存・録音・ブラウザの状態が消えないようにする。
 struct ContentView: View {
+    enum Tab { case save, live }
     @StateObject private var saver = Saver()
     @StateObject private var recorder = AudioRecorder()
+    @StateObject private var browser = LiveBrowser()
+    @ObservedObject private var live = LiveRecorder.shared
+    @State private var tab = Tab.save
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        TabView(selection: $tab) {
+            SaveRecordView(saver: saver, recorder: recorder)
+                .tabItem { Label("保存・録音", systemImage: "arrow.down.circle") }
+                .tag(Tab.save)
+            LiveRecordView(browser: browser, audio: recorder)
+                .tabItem {
+                    let on = live.recording || (recorder.recording && recorder.selfAudio)
+                    Label(on ? "ライブ録画（録画・録音中）" : "ライブ録画", systemImage: on ? "record.circle.fill" : "play.tv")
+                }
+                .tag(Tab.live)
+        }
+        .frame(minWidth: 820, minHeight: 740)
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in saver.cancel(); recorder.stop() }
+    }
+}
+
+struct SaveRecordView: View {
+    @ObservedObject var saver: Saver
+    @ObservedObject var recorder: AudioRecorder
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 14) {
                 Image(systemName: "arrow.down.circle.fill").font(.system(size: 44)).foregroundStyle(.blue)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Video Saver").font(.largeTitle.bold())
-                    Text("動画を MP4 で、Mac のフォルダへ。").foregroundStyle(.secondary)
+                    Text("動画を MP4 で、音声を m4a で、Mac のフォルダへ。").foregroundStyle(.secondary)
                 }
             }
-            TextField("https://www.youtube.com/watch?v=…", text: $saver.url)
-                .textFieldStyle(.roundedBorder).disabled(saver.busy)
-            HStack {
-                Picker("画質の上限", selection: $saver.quality) {
-                    Text("720p").tag("720")
-                    Text("1080p").tag("1080")
-                    Text("4K").tag("2160")
-                }.frame(width: 210).disabled(saver.busy)
+
+            // 保存先（動画の保存・音声の録音で共通）
+            HStack(spacing: 10) {
+                Text("保存先").font(.headline)
+                Text(saver.folder.path).font(.callout).foregroundStyle(.secondary)
+                    .lineLimit(1).truncationMode(.middle).textSelection(.enabled)
                 Spacer()
-                Button("保存先を選ぶ…", action: saver.chooseFolder).disabled(saver.busy)
+                Button("選ぶ…", action: saver.chooseFolder).disabled(saver.busy || recorder.recording)
+                Button("フォルダを開く") { NSWorkspace.shared.open(saver.folder) }
             }
-            Text(saver.folder.path).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
+
+            GroupBox {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("動画を保存").font(.headline)
+                    TextField("https://www.youtube.com/watch?v=…", text: $saver.url)
+                        .textFieldStyle(.roundedBorder).disabled(saver.busy)
+                    HStack {
+                        Picker("画質の上限", selection: $saver.quality) {
+                            Text("720p").tag("720")
+                            Text("1080p").tag("1080")
+                            Text("4K").tag("2160")
+                        }.frame(width: 210).disabled(saver.busy)
+                        Spacer()
+                        if saver.busy {
+                            ProgressView().controlSize(.small)
+                            Button("停止", action: saver.cancel)
+                        }
+                        Button(action: saver.start) { Label("動画を保存", systemImage: "arrow.down.to.line") }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(saver.busy || saver.url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    }
+                    Text(saver.status).font(.callout).textSelection(.enabled)
+                    ScrollView {
+                        Text(saver.log.isEmpty ? "処理の詳細はここに表示されます。" : saver.log)
+                            .font(.system(size: 11, design: .monospaced)).textSelection(.enabled)
+                            .frame(maxWidth: .infinity, alignment: .leading).padding(10)
+                    }
+                    .frame(minHeight: 80, maxHeight: .infinity)
+                    .background(.quaternary.opacity(0.3)).clipShape(RoundedRectangle(cornerRadius: 8))
+                }.padding(6)
+            }
+
             AudioRecorderView(recorder: recorder, folder: saver.folder, disabled: false)
-            HStack {
-                Button(action: saver.start) { Label("動画を保存", systemImage: "arrow.down.to.line") }
-                    .buttonStyle(.borderedProminent).disabled(saver.busy || saver.url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                if saver.busy {
-                    ProgressView().controlSize(.small)
-                    Button("停止", action: saver.cancel)
-                }
-                Spacer()
-                Button("保存フォルダを開く") { NSWorkspace.shared.open(saver.folder) }
-            }
-            Text(saver.status).font(.callout).textSelection(.enabled)
-            ScrollView {
-                Text(saver.log.isEmpty ? "処理の詳細はここに表示されます。" : saver.log)
-                    .font(.system(size: 11, design: .monospaced)).textSelection(.enabled)
-                    .frame(maxWidth: .infinity, alignment: .leading).padding(12)
-            }.background(.quaternary.opacity(0.3)).clipShape(RoundedRectangle(cornerRadius: 8))
+
             Text("保存が認められている動画にお使いください。MP4（H.264 / AAC）で保存します。必要な場合だけ変換します。")
                 .font(.caption).foregroundStyle(.secondary)
-        }.padding(28).frame(minWidth: 640, minHeight: 640)
-            .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in saver.cancel(); recorder.stop() }
+        }.padding(28)
     }
 }
 
@@ -206,6 +247,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
         NSApp.activate(ignoringOtherApps: true)
+    }
+    func applicationWillTerminate(_ notification: Notification) {
+        MainActor.assumeIsolated { LiveRecorder.shared.emergencySave() }
     }
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
 }
