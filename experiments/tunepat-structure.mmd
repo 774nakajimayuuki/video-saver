@@ -1,6 +1,0 @@
-flowchart TD
-  A["起動・部品更新のコード"] --> B["アプリ制御<br/>main_arm64.jsc"]
-  C["NHKページ内の専用スクリプト"] -->|"動画検出の通知"| B
-  U["操作画面<br/>renderer_arm64.jsc"] --- B
-  B -. "処理の受け渡しは未確定" .-> N["独自の映像処理部品<br/>Widevine・libdecrypt・FFmpeg系"]
-  N -. "生成経路は未確定" .-> O["保存済みMP4<br/>1080p・音声あり"]

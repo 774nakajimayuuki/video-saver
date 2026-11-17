@@ -28,45 +28,7 @@ import AppKit
             status = "http または https の動画 URL を入力してください"; return
         }
         if host.lowercased() == "web.nhk" || host.lowercased().hasSuffix(".web.nhk") {
-            /*
-             未実装部分と、保存可能な入力を接続するための設計（2026-10-11）
-
-             現在の到達点:
-             NHKLogin / NHKConnection はログインと限定した認証確認までです。
-             NHK ONE の番組本体の取得・復号・MP4保存は接続されていません。
-             この return を維持し、通常のダウンローダーには引き渡しません。
-
-             実装に必要なもの（保存・書き出しを許可された素材を対象とする設計）:
-
-             1. 保存対象の情報を用意する担当
-                配信側が提供する情報から、映像・音声それぞれの取得元、順序、
-                コーデック、再生時間、開始時刻を取得します。
-                出力: 対象ID、選択した映像/音声、時間情報を持つ保存計画。
-                動画が一本のファイルか分割配信かを区別し、画質上限を適用します。
-
-             2. 素材を取得し、保存用の入力を作る担当
-                計画した素材を一時領域へ取得し、進捗・中止・失敗を通知します。
-                暗号化素材では、利用可能な正規の仕組みがMP4書き出しに使える
-                データを提供するかを先に確認し、その対応部品が必要です。
-                アプリ内だけでのオフライン再生と、汎用MP4の書き出しは別の機能です。
-                出力: 保存を許可され、メディア処理系で読み取れるローカル素材。
-                NHKでこの出力を得られる仕組みは、本ソースでは確立していません。
-
-             3. 映像・音声をMP4変換処理へ渡す担当
-                別々のトラックなら、時間情報を保って結合する処理を追加します。
-                既存のMP4Plan.arguments(source:output:)は入力ファイルが1つなので、
-                必要なトラックを持つ読み取り可能なファイルを先に用意します。
-                その入力をffprobeで調べ、既存MP4Planへ渡してコピー/変換を選びます。
-                MP4Plan自体には暗号化された番組を読める状態にする処理はありません。
-
-             4. 完成を確認して保存先へ移す担当
-                トラック、再生時間、音声との同期、全区間のデコードを確認します。
-                再圧縮しない経路は、圧縮された映像・音声のデータ一致も検証します。
-                合格した出力だけを最終保存先へ移し、失敗や中止では一時素材を片付けます。
-                同名ファイルの扱いと後片付けは、下の既存保存処理を再利用できます。
-
-             */
-            status = "NHK ONE はログイン・認証確認まで対応しています。番組の MP4 保存は未対応です。"
+            status = "NHK ONE の保存には対応していません。"
             return
         }
         let executable = Bundle.main.bundleURL.appendingPathComponent("Contents/Helpers/yt-dlp")
@@ -194,8 +156,7 @@ import AppKit
 
 struct ContentView: View {
     @StateObject private var saver = Saver()
-    @StateObject private var nhkLogin = NHKLogin()
-    @StateObject private var nhkConnection = NHKConnection()
+    @StateObject private var recorder = AudioRecorder()
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack(spacing: 14) {
@@ -217,29 +178,7 @@ struct ContentView: View {
                 Button("保存先を選ぶ…", action: saver.chooseFolder).disabled(saver.busy)
             }
             Text(saver.folder.path).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
-            GroupBox {
-                VStack(alignment: .leading, spacing: 8) {
-                  HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("NHK ONE").font(.headline)
-                        Text(nhkLogin.state.title).font(.caption).foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    Button("ログイン画面を開く") { nhkLogin.isPresented = true }
-                  }
-                  HStack {
-                    Button("接続の準備を確認") { nhkConnection.check(login: nhkLogin) }
-                        .disabled(nhkConnection.busy || saver.busy)
-                    if nhkConnection.prepared && !nhkConnection.attempted {
-                        Button("視聴認証を1回試す") { nhkConnection.check(login: nhkLogin, sendOnce: true) }
-                            .disabled(nhkConnection.busy || saver.busy)
-                    }
-                    if nhkConnection.busy { ProgressView().controlSize(.small) }
-                  }
-                  if !nhkConnection.status.isEmpty { Text(nhkConnection.status).font(.caption).textSelection(.enabled) }
-                  Text("接続確認の対象：北海道道（今回の確認用番組）").font(.caption).foregroundStyle(.secondary)
-                }.padding(6)
-            }
+            AudioRecorderView(recorder: recorder, folder: saver.folder, disabled: false)
             HStack {
                 Button(action: saver.start) { Label("動画を保存", systemImage: "arrow.down.to.line") }
                     .buttonStyle(.borderedProminent).disabled(saver.busy || saver.url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -256,12 +195,10 @@ struct ContentView: View {
                     .font(.system(size: 11, design: .monospaced)).textSelection(.enabled)
                     .frame(maxWidth: .infinity, alignment: .leading).padding(12)
             }.background(.quaternary.opacity(0.3)).clipShape(RoundedRectangle(cornerRadius: 8))
-            Text("NHK ONE の番組保存は未対応です。\n保存が認められている動画にお使いください。MP4（H.264 / AAC）で保存します。必要な場合だけ変換します。")
+            Text("保存が認められている動画にお使いください。MP4（H.264 / AAC）で保存します。必要な場合だけ変換します。")
                 .font(.caption).foregroundStyle(.secondary)
-        }.padding(28).frame(minWidth: 640, minHeight: 620)
-            .sheet(isPresented: $nhkLogin.isPresented, onDismiss: nhkLogin.refreshStatus) { NHKLoginView(login: nhkLogin) }
-            .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in nhkLogin.refreshStatus() }
-            .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in saver.cancel() }
+        }.padding(28).frame(minWidth: 640, minHeight: 640)
+            .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in saver.cancel(); recorder.stop() }
     }
 }
 
