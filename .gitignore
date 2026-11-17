@@ -18,12 +18,7 @@ node_modules/
 
 # Locally supplied binaries and source archives
 /yt-dlp
-/local-components/
 /exports/
-/experiments/nhk-auth-trial/public-scripts/
-/experiments/minimal-cdm-trial/cdm_probe
-/experiments/minimal-cdm-trial/decode_probe
-/experiments/minimal-cdm-trial/license_probe
 
 # Local credentials and browser/session data
 .env
@@ -51,5 +46,3 @@ Cookies-shm
 *.yuv
 *.pcm
 *.bin
-# Public initialization data required by build.sh (not a credential).
-!/experiments/nhk-auth-trial/nhk-init-data.bin
