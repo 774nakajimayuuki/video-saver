@@ -1,0 +1,129 @@
+TunePat：保存ジョブと配信ファイル取得の受け渡し
+確認日：2026-10-10（日本時間）
+対象：TunePat VideoGo All-In-One 3.1.0 Appleシリコン版
+
+今回の結論
+
+保存指示は、アプリ制御 → libMediaConvert → media_handle → FFmpeg内の
+libTranscodeDLLという経路で渡される。
+一方、配信ファイルの取得要求はlibTranscodeDLLから制御側へ戻される。
+取得後、その結果がDownloadResultとして映像処理側へ通知される。
+読み込み側は断片ファイルの取得状況を確認し、取得できたファイルから
+映像・音声のサンプルを読み、前回確認した処理へ渡す。
+
+このため「ダウンロード機能はFFmpegの中だけで完結する」という構造ではない。
+実際のネットワーク要求を発行するJavaScript本体の詳細は未復元だが、
+ネイティブ側からアプリへ依頼し、結果を受け取る境界は確認できた。
+
+1. 保存ジョブが映像処理に届くまで
+
+libMediaConvertのExecuteはTaskを追加し、Operator::Executeへ渡す。
+CDMApp::DoOperationはJSONのopType / opDataを読み、ConvertをOnConvertへ振り分ける。
+OnConvertはmedia_handleの接続先を取得し、IPCでメッセージを送る。
+
+media_handleのOnConvertは、Convertメソッドを作業キューへ登録する。
+このつながりは関数名の推測だけでなく、命令が参照する実際の関数アドレスを
+照合した。OnConvert内0x100015bd0の参照先はConvertの0x100015ff4と一致する。
+
+Convertは共通情報と設定を読み、FFmpegの引数を組み立て、RunTranscodeを呼ぶ。
+StartTranscodeはプロセスを開始し、接続の応答を待ち、Convertの情報をIPCで送る。
+したがって、コマンドライン引数だけでは保存ジョブの全情報はそろわない。
+
+受信側のlibTranscodeDLL::Convert::OnConvertは、ジョブ設定の解析、読み込み側の
+開始、処理モジュールの準備、Downloaderの初期化を行う。
+
+2. ジョブのデータ項目
+
+コードが読み書きしている項目名の一部：
+
+外側のメッセージ
+  opType / opData / token
+
+Convertのデータ
+  mediaId / serviceID / input.tracks
+  output.path / output.cachePath / output.hwaccel / moduleAuthState
+  映像コーデック、音声設定、字幕形式などの出力項目
+
+トラックの取得情報
+  headUrl / segmentUrl
+
+これは部分的な項目一覧であり、実行可能なAPI仕様書ではない。
+全項目の必須・任意、既定値、入力検証、状態との対応はまだ確定していない。
+moduleAuthStateも名前だけから配信サービスのログイン状態と同一視しない。
+
+3. 取得依頼の往復
+
+libTranscodeDLL::Downloader::RequestDownload
+  → DownloadメッセージをIPCで送信
+  → libMediaConvert側のCDMApp::DoDownload
+  → MsgUiProxyInterface::CallUiOperationCmd("Download", ...)
+  → 登録済みのアプリ側コールバック
+  → アプリ側の処理
+  → SetUIOperationResult / ResultCallback
+  → DoDownloadが登録した完了用コールバック
+  → DownloadResultメッセージをIPCで返送
+  → Downloader::ParseDownloadResult
+
+DoDownloadの完了用コールバックには、DownloadResultの構築とSendIpcMessageが
+実際に存在する。SetUIOperationResultからResultCallbackへの転送も確認した。
+
+取得要求で扱う項目：
+  reqId：要求の識別子
+  url：取得対象
+  path：保存先
+  convertToken / context：処理との関連付けや付随情報
+  length / offset：取得する範囲に関する値
+
+取得結果で読む項目：
+  error / errorCode
+  data.reqId / data.path / data.progress
+
+上記は定義上の項目名のみ。実際のURL、トークン、Cookieなどは報告に含めていない。
+
+アプリ側のV8バイトコードには、DownloadUtil、customDownload、downloadUrlToPath、
+downloadUrlToPathCommon、downloadWithRetryなどの識別名が残っている。
+ただし、名前が存在することは、そのすべてが今回実行された証拠ではない。
+JavaScript側のコールバック本体、HTTP実装、ヘッダーの組み立ては未確定。
+
+4. 取得したファイルを映像処理へ渡すまで
+
+MediaDataReader::SwitchToNextSegment
+  → CheckDownloadStatusで取得状況を確認
+  → ResetSampleTablesへ断片ファイルを渡す
+  → ReadFileでファイルを開く
+  → GetSampleTablesでサンプルの位置などを取得
+  → ReadNextSample内のAP4_Sample::ReadData
+  → MediaDataBuffer::FromAp4Sample
+  → 前報のConvert::DecryptSample
+
+ヘッダー部と断片部の取得情報をトラックごとに持ち、断片を切り替えて読む構造。
+取得と読み込みの同期があるため、番組全体を最後まで取得してから一括変換する
+方式だけを想定した実装ではない。今回の正確な先読み量・同時取得数は未確認。
+
+5. MP4までの終了処理
+
+media_handle::Convertには、変換処理の起動、進捗通知、必要に応じた格納処理、
+結果通知がそろっている。
+前報の保存ログでは、映像のH.264再圧縮後に、コピーで最終格納する段階があった。
+最後の段階にcopyがあることを、処理全体が無劣化コピーである証拠とはしない。
+
+設定を置き換える補助ファイルを読むコードもあるが、今回のログでは、その
+ファイルが存在しないと記録されていた。今回の保存経路の必須要素には含めない。
+
+6. 検証と限界
+
+新しい検証用スクリプトで21関数について、対象コード、参照先、関数範囲の
+ハッシュを確認した。加えて、既存ログの安全な事実5件を照合した。
+ライブラリを呼び出したり、アプリを改変したりした検証ではない。
+
+今回つながった範囲：
+保存指示、子プロセス開始、設定送信、配信ファイルの取得依頼と結果返送、
+取得済み断片の読み込み、フレーム処理への入力、終了・結果通知。
+
+残る範囲：
+JavaScriptバイトコードの完全な処理順、ネットワーク実装、CDMの実行状態を
+独立したアプリで再現するための全条件。主要な担当関係が判明したことと、
+TunePatを使わずに動く保存アプリが完成したことは別の到達点である。
+
+根拠：tunepat-job-download-evidence.json
+検証：analyze_tunepat_job_download.py

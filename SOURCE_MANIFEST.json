@@ -1,0 +1,596 @@
+{
+  "created_at": "2026-10-10T15:52:22.076570+00:00",
+  "purpose": "Source snapshot; NHK programme MP4 export remains unimplemented",
+  "files": [
+    {
+      "path": "MP4ExportTests.swift",
+      "bytes": 2940,
+      "sha256": "b2e6bbab5a06263696c0e9d65114ef649b3b0ac0c578a805e33896fb730d8044"
+    },
+    {
+      "path": "MP4Plan.swift",
+      "bytes": 1475,
+      "sha256": "4f410d345ca2ce91379b378537a4bdcd860a11cb9d31ede9e382fae5bcff5370"
+    },
+    {
+      "path": "NHKConnection.swift",
+      "bytes": 5968,
+      "sha256": "1474303736b6f591dd92e2279573c0428706b73af3a6a46d6f343b24e0b30ecd"
+    },
+    {
+      "path": "NHKLogin.swift",
+      "bytes": 8842,
+      "sha256": "916c55f07db9a492bb136a52a5b292a8cfc23a244a9251819e98ded2f91e17c5"
+    },
+    {
+      "path": "NHKLoginState.swift",
+      "bytes": 2574,
+      "sha256": "1b8c4594bf49fb1452db35bd2244f7ea57b633fde28918724f7cde25de8a1921"
+    },
+    {
+      "path": "NHKLoginStateTests.swift",
+      "bytes": 3249,
+      "sha256": "cbc3ffaa240e641213e196884569461e60d6ec71a32de1611f2f08bfd5142b18"
+    },
+    {
+      "path": "README.txt",
+      "bytes": 5257,
+      "sha256": "ed480d3888ae87521a387b9d3c5aff53e817729a6a4c021acc9c479957c30933"
+    },
+    {
+      "path": "SOURCE_INDEX.txt",
+      "bytes": 11473,
+      "sha256": "d306e4e017b93beb64e2c5931e024b88ca508151befece3592264abbd4306d9f"
+    },
+    {
+      "path": "VideoSaver.swift",
+      "bytes": 16758,
+      "sha256": "fd722066659fb166f1584ebe56d8b98cb53a6f81bc3215c1de270969fe81e964"
+    },
+    {
+      "path": "build.sh",
+      "bytes": 2194,
+      "sha256": "f4195c4f492cbbe56c7cb8ad85274557499bc47af14b0f244d9e2f33ae5af0bc"
+    },
+    {
+      "path": "experiments/README.txt",
+      "bytes": 3370,
+      "sha256": "5fb58af4f218c97a82e303155dc46cfffb6e61e06f52dafc6135abe4bc7ad475"
+    },
+    {
+      "path": "experiments/analyze_tunepat_frame_boundary.py",
+      "bytes": 7600,
+      "sha256": "5306c690f172e6391978fd5bb38f78ff6ddc58863349cb950b96d9e73ea489e1"
+    },
+    {
+      "path": "experiments/analyze_tunepat_handoff.py",
+      "bytes": 8582,
+      "sha256": "feb88f1c292e29a8dc6bb8b23702e462f7f28cfd7c95ad5de36fe073b26ec202"
+    },
+    {
+      "path": "experiments/analyze_tunepat_job_download.py",
+      "bytes": 9542,
+      "sha256": "95bcface6e9ec989a4e6c3ad8414e1257c17da9d25d19c7fec51ed42bf1934f0"
+    },
+    {
+      "path": "experiments/analyze_tunepat_nhk_license.py",
+      "bytes": 13711,
+      "sha256": "b657b75ec750f783da5c59c7ccda88ad27b78cbd74c57fff12256189c4c700cb"
+    },
+    {
+      "path": "experiments/analyze_tunepat_transport.py",
+      "bytes": 7659,
+      "sha256": "b93b9a9f42dcc8a0a99f264ad4e2ed2483b8df8df7f4739283b585a0b12dce82"
+    },
+    {
+      "path": "experiments/cdm-replacement-report.txt",
+      "bytes": 6183,
+      "sha256": "8ef19612645b510932cb8568309fc6fbc25b29567766909faf0506a4553b4632"
+    },
+    {
+      "path": "experiments/decoded-video-probe.js",
+      "bytes": 6736,
+      "sha256": "49f3317b7081d9fb3cebaff3053af7a4fd6b0d500d1b7334305c654a57110903"
+    },
+    {
+      "path": "experiments/download-investigation.txt",
+      "bytes": 4778,
+      "sha256": "edf4bd40fddef8c43afda6c956c24293dc6105631e9d7ffeb17c0dbfb031af17"
+    },
+    {
+      "path": "experiments/fetch_nhk_public_scripts.py",
+      "bytes": 2344,
+      "sha256": "fe545471a9ed4dd67e1b59914551b10071f5c78d3eef445ee87d4d3f39aea629"
+    },
+    {
+      "path": "experiments/inspect_macho_boundary.py",
+      "bytes": 3948,
+      "sha256": "ac7307df70ef8cf1ddb7d7b6b507cd6396415ef183a7866fb958440096363d03"
+    },
+    {
+      "path": "experiments/inspect_tunepat_strings.py",
+      "bytes": 4276,
+      "sha256": "234dff1809d76c384f63dd446ecf6a1ea46d141072093f58a8d5cb81dbe6aa85"
+    },
+    {
+      "path": "experiments/keepstreams-trial.txt",
+      "bytes": 3183,
+      "sha256": "0f74ac0eaab26b3cfc89c6dcd709aa11fdc0e3f698cf29e37161b44f9aa3f2ad"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/README.txt",
+      "bytes": 6589,
+      "sha256": "bb79944958d5681f3d57e74f1b32efac1e23731a991e47f83751dd673cfb778d"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/annexb-result.json",
+      "bytes": 1205,
+      "sha256": "5899705ba9e386d90bee7f5b180da1e115f348ca33fdbfc54fd5343ad846fbe1"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/bootstrap-result.json",
+      "bytes": 1992,
+      "sha256": "bb7447743ea0e244b2836604d117f67220bcc6c30e1a5ede969ee36966e408d2"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/bootstrap-verified.json",
+      "bytes": 1992,
+      "sha256": "98af1a3ffd892757882465b62350a61d8737cf66d57f18554b3516a12b359c60"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/build.sh",
+      "bytes": 202,
+      "sha256": "4c97f599396331fb45761e8673b8ba7a6b5f806f2170cbb7e0614ab5718b484b"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/cdm_probe.cpp",
+      "bytes": 8906,
+      "sha256": "7f9bdcb6c813b18f5626db25febabd30e500f77d1d05db7faad642d3b7f4f54f"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/chrome-cdm-bootstrap-result.json",
+      "bytes": 1992,
+      "sha256": "5b64f903bce13342ca8d889fe7277ab256e8fa342e6608e538bca8296ccaca28"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/decode-result.json",
+      "bytes": 762,
+      "sha256": "738b4fae4413e4aa6edb92fa83a4c83f9c770360fb803438ffc01118281a2c82"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/decode_probe.cpp",
+      "bytes": 7306,
+      "sha256": "4d628e498d4b7fd5fe8c97e8c00908673d5c16896e419b072ee27f5866e51541"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/decrypt_samples.h",
+      "bytes": 4040,
+      "sha256": "6f22cc423d209880be54a703f42ad055a2317e60a3d9f2c52a80a61cf969c076"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/final-check-result.json",
+      "bytes": 1205,
+      "sha256": "af70494bf83823bf629eee7ec8cebe8566cce247dfbe5f4ae7145688b84370ab"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/final-check-save-result.json",
+      "bytes": 478,
+      "sha256": "6a1db98b108abb0b89889145bc0ce18c30bc3150b4e080ab685c36ae881e743e"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/fixture-info.json",
+      "bytes": 387,
+      "sha256": "be874614fe02149d05b3a732b43c18ce234b3e9ca73deb9782e49b72c8f8ef6b"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/include/LICENSE",
+      "bytes": 1536,
+      "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/include/content_decryption_module.h",
+      "bytes": 82841,
+      "sha256": "33bfb3b5622ac594cbb6220928139bb933747dfceb031bd36b4eace114b5ec11"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/include/content_decryption_module_export.h",
+      "bytes": 1364,
+      "sha256": "49a7cb22fdade5359aed8763f1c6902ae3b0347668ac54424f90d43b87192e2e"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/license_probe.cpp",
+      "bytes": 4947,
+      "sha256": "372d1563a7207459faaf3d007308c0bdb5a1f043235aa3c380b2b2ecdd9f3db7"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/offline-license-result.json",
+      "bytes": 1314,
+      "sha256": "09cf2a3c17c97f02d10f7d477d32933db2f745fb735ee6c78cf4fd61963770f8"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/offline-media-license-result.json",
+      "bytes": 1452,
+      "sha256": "344d736d991ff95c24d8b3e3fed2cf320df27a2fda4c1a58345470983f7ffa1c"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/prepare_fixture.py",
+      "bytes": 3925,
+      "sha256": "3bddb7f928035723b93c3c982877c04ecb126a076a7bf13f10b70cde4f55cc81"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/prepare_public_media.py",
+      "bytes": 4977,
+      "sha256": "d1eb3c52c81eedbf1514de76cd0f3737d24051879fe692c75547466dbd08b990"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/progress.txt",
+      "bytes": 3432,
+      "sha256": "17e19c88fc153adc198da8f82069b7e628c80043fd5369abc133af2f4ae5e2c6"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-cenc-fixture-info.json",
+      "bytes": 240,
+      "sha256": "8ad99cf68b697dd60b0c6a876a27aaba9f990e09700154569a00eb8ac0714de5"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-cenc-provenance.json",
+      "bytes": 809,
+      "sha256": "fcfa216b90f2154e645f9e7e6aba9948ba2ddaa8f95f916ef0a8f958fa518cac"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-encrypted-negative-control.json",
+      "bytes": 211,
+      "sha256": "7be86bf86bd609c594c0f3902ea17ed823e03a901144a25b40611336bdfd0538"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-license-result.json",
+      "bytes": 1552,
+      "sha256": "7d12f1cb1c437070d29d26b8840603b3158695b216dfd7464562499700370bc7"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-media-license-result.json",
+      "bytes": 1803,
+      "sha256": "32e31493a6bdd3156816299f6691dd135f8dca5017d545cb8ded2a16c86e1a84"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-media-preflight-result.json",
+      "bytes": 1325,
+      "sha256": "3fb4b7d2b633628df6bbcb835be839805e1e40546a7570ef067e7974d9669b75"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-media-provenance.json",
+      "bytes": 920,
+      "sha256": "2bd146f9e0b16c7ec0ba8aa84d283b3c2fadbe6f89b8e49f5dfcc0d7436b1b46"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public-media-save-result.json",
+      "bytes": 1433,
+      "sha256": "0c45d2354951ea491433c724effe33da7df731dd857c42350b50053d918b899e"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/public_cenc_fixture.py",
+      "bytes": 7349,
+      "sha256": "5bcc3eecc3b4979717a847b5cbfd429a6cbed552778576bee57353ad1186d899"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/run_decode.py",
+      "bytes": 2119,
+      "sha256": "188759f3b86e802f2785595b344becc9411433b9d870fbe84d669a159ee877d3"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/run_probe.py",
+      "bytes": 3196,
+      "sha256": "b542125bc9f2b387a75aefe39b53a84e3ee113b635ee32f00056e9b50b7d0bcc"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/run_public_license.py",
+      "bytes": 6222,
+      "sha256": "897beb4ef48003c5a8c9662ee30f0f5d0d8dd64443190c79e2cf9e63594148dd"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/select_public_encrypted_segment.py",
+      "bytes": 1822,
+      "sha256": "c66702be29e1e61e5accc707db846eab1f4defe9388c938a1304f2ff1b4fad1d"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/source-provenance.json",
+      "bytes": 1306,
+      "sha256": "9a32046f441675bb16c788615c098fe251ae6622430ceb672eb3c4c6ca730333"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/standalone-cdm-bootstrap-result.json",
+      "bytes": 1992,
+      "sha256": "e17e78d34ca901bc11497ed29ff16840d2632bd1d9e8abdb106dfe29ad1bcddf"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/synthetic-save-result.json",
+      "bytes": 530,
+      "sha256": "694e50902047b001b9a9d160df024bb3127f469b82088461dbce6cb987cc68dd"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/verify_public_media.py",
+      "bytes": 5247,
+      "sha256": "153e2406e663003ed4eacde29430bcf4ce0c2ec66548b9c5326d2006cab1ddd0"
+    },
+    {
+      "path": "experiments/minimal-cdm-trial/verify_save.py",
+      "bytes": 2956,
+      "sha256": "42f896642a51cc0cb23d7cac7f458035c03018acb1b92d00be2ea85e8f63a8b7"
+    },
+    {
+      "path": "experiments/minimal-trial-report.txt",
+      "bytes": 7716,
+      "sha256": "bd32626f4494c5515fc3e835dd3185fd950edff1549b7ad45c4b654e0ed60abf"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/README.txt",
+      "bytes": 1981,
+      "sha256": "4c0b7456596edfb353166f5d2affb9eb66c5935e9470a903da1707b0959ecd91"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/auth-evidence.json",
+      "bytes": 2923,
+      "sha256": "62a51538e64ebcc7f7c51fa1bc358cc8d52c436e812455752e0a85ed13a2e92f"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/chrome-cdm-verification.json",
+      "bytes": 856,
+      "sha256": "05abfffcb3933aebe41ca0a42a893d2ec236274a674f9065902ab4a5c53debe7"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/chrome-license-attempt.json",
+      "bytes": 132,
+      "sha256": "9ad79b7686f7efc7cb6a6d3be4d6a97f647152f6482ca40e2960258fb188f06c"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/chrome-license-result.json",
+      "bytes": 2290,
+      "sha256": "8ec352b673727164f8cfc2561f285f3e5f274b01b7391954cb28cdc83c46e312"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/init-data-provenance.json",
+      "bytes": 464,
+      "sha256": "48cec0cefe006c04e3a6ac2e16b1e916eb7821e4c121fe384fc9c3343dd5b710"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/nhk-init-data.bin",
+      "bytes": 65,
+      "sha256": "49e5c4dabd092a2f4418c5eba35de0dd9c24081ed1fcb09b004e47cfa4023636"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/nhk-license-attempt.json",
+      "bytes": 132,
+      "sha256": "36c730025de42d6c0dd4959ff0b1101bff8b713d50f4b9ee71edb5623c897805"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/nhk-license-result.json",
+      "bytes": 2171,
+      "sha256": "660c08476cf1943a1fc451112f6a29d9e11383b00e440f835cf15f04099368c4"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/offline-chrome-license-result.json",
+      "bytes": 2128,
+      "sha256": "440a2ff2b8ae9ea660945901cfd2b6cd10c4d882bd633539dd477e5373481fa9"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/offline-license-result.json",
+      "bytes": 2009,
+      "sha256": "dfc4237b6108666b8b4cd5d312774491ba6df20f20bc30a88309301e8a52faab"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/player-script-provenance.json",
+      "bytes": 230,
+      "sha256": "452fa3d1e7203b63b44223188ef255f78a2e030337b5fe037495fdd92c01ebe3"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/public-scripts-provenance.json",
+      "bytes": 10409,
+      "sha256": "cafec9e8086df126c3aee4e286ffbd1dd2d85be3e49ae1aaa70b46e1851f6109"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/run_nhk_license.py",
+      "bytes": 9538,
+      "sha256": "460327e45b5507dea44c2f591e36413f5230c837b687dee405bfa34c8deda4a1"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/test_transport_limits.py",
+      "bytes": 2767,
+      "sha256": "25839957b1b51dab93e161e307e561e3cca994bcebddaa03e824cf046c868163"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/verify_auth_evidence.py",
+      "bytes": 4181,
+      "sha256": "5fce978ba1e3640306c337dae4dbf8f2cdc81c2761439907f24a9a61c2ff8a7c"
+    },
+    {
+      "path": "experiments/nhk-auth-trial/verify_chrome_cdm.py",
+      "bytes": 2595,
+      "sha256": "e1d430cc7612a860cc68610f1060cb309988a0f65753d5e29c06e1cef02f55a1"
+    },
+    {
+      "path": "experiments/own-session-license-attempt.json",
+      "bytes": 131,
+      "sha256": "220b3597b627ebeb582ad16a16d8e7d4c19e8b41ea4ea36f7141f1cbf1010efe"
+    },
+    {
+      "path": "experiments/own-session-license-result.json",
+      "bytes": 478,
+      "sha256": "0e339322eaf25ec01a9922988cb444e3e278b02cb8f595f86f00ef59af0cc9d0"
+    },
+    {
+      "path": "experiments/own-session-preparation-result.json",
+      "bytes": 464,
+      "sha256": "1234a5a335d2def19ed4ce850871b16b4b7a12c26bd89109f6cb4aee0cf01f9f"
+    },
+    {
+      "path": "experiments/public-license-trial-report.txt",
+      "bytes": 3577,
+      "sha256": "1c9f99367668acf47fc581589ff37fd45d78b5f1f1fe8f13cceca140c308d111"
+    },
+    {
+      "path": "experiments/public-media-trial-report.txt",
+      "bytes": 7161,
+      "sha256": "5f159f80d82cf4d375efb515f63ca91169dac23f5b6ec3db9cdbbd67ad5b8378"
+    },
+    {
+      "path": "experiments/source-summary-report.txt",
+      "bytes": 3696,
+      "sha256": "6bb769bca1c2ffbd370c6aa28350a42a5f8156e02e460611b6584f57cbadfc0a"
+    },
+    {
+      "path": "experiments/standalone-app-report.txt",
+      "bytes": 7759,
+      "sha256": "4da5428b966fb211b0efba04f0612b42da32a09c272af8460881a0f4775bf761"
+    },
+    {
+      "path": "experiments/standalone-app-verification.json",
+      "bytes": 1094,
+      "sha256": "9ed82568537daf12f5da4667adadab56dbd5edb7eb906eb5e63ccffe6b62b154"
+    },
+    {
+      "path": "experiments/standalone-synthetic-ipc-check.json",
+      "bytes": 518,
+      "sha256": "c8f16778d0c5f06a9e5abc6c5f49ca2c1fbc78437d73b7f3ba7941d29bc94062"
+    },
+    {
+      "path": "experiments/tunepat-analysis-progress.txt",
+      "bytes": 5772,
+      "sha256": "54845320f161ecaaa94e6cee1633d4ff3b0e17ebffe09e94d03fb2854a4a88d9"
+    },
+    {
+      "path": "experiments/tunepat-analysis-verification.json",
+      "bytes": 233,
+      "sha256": "57043f358e2c0381d388d32f64ee994397ba2886cc73b7892920213acf5d3b65"
+    },
+    {
+      "path": "experiments/tunepat-decode-transport-analysis.txt",
+      "bytes": 6974,
+      "sha256": "034fdd6319a215274ae6ab9f3f300b0cafd23bd84212153b2db70aac9a03ef4a"
+    },
+    {
+      "path": "experiments/tunepat-decode-transport-evidence.json",
+      "bytes": 9720,
+      "sha256": "0983b08079b4a353d5354c4eff977723986140a856b7f4bbca6390faa783fd0c"
+    },
+    {
+      "path": "experiments/tunepat-end-to-end-analysis.txt",
+      "bytes": 10563,
+      "sha256": "fd032b901a83bacdfd4e37e28b8e8f3d3ceded0c223e885a7e0dcaed510061b1"
+    },
+    {
+      "path": "experiments/tunepat-end-to-end.mmd",
+      "bytes": 1439,
+      "sha256": "f38fd7e98be665c66d4214094ea40a6c9fd20a1db8bdf1817d8f0a5be75f69f7"
+    },
+    {
+      "path": "experiments/tunepat-frame-boundary-analysis.txt",
+      "bytes": 11504,
+      "sha256": "d3468d164b6734be975fb5cf329fae98f908df3c625600f6cd56d4f234852e81"
+    },
+    {
+      "path": "experiments/tunepat-frame-boundary-evidence.json",
+      "bytes": 7450,
+      "sha256": "13f5f9aa4eb4c81031aeb9ca13b531509629c0c839b7c1035a991f167562bc7e"
+    },
+    {
+      "path": "experiments/tunepat-frame-boundary.mmd",
+      "bytes": 547,
+      "sha256": "c927a063e34942e981dcc2ed1e75d00e755274f371bba909b9921b78bb5dbfe0"
+    },
+    {
+      "path": "experiments/tunepat-handoff-analysis.txt",
+      "bytes": 11856,
+      "sha256": "6e78ef064da9fd2772e41cabe5a85c6f233167b4c8929d1f609f34411042b98e"
+    },
+    {
+      "path": "experiments/tunepat-handoff-evidence.json",
+      "bytes": 10833,
+      "sha256": "66209cd5824102510af11bdc3c4031465abc9897682f402a3bab1b1c2e27f084"
+    },
+    {
+      "path": "experiments/tunepat-handoff.mmd",
+      "bytes": 864,
+      "sha256": "be59c95a46c254647af5be2eb6e748d4053ff739039d2c2e3d671060f408058a"
+    },
+    {
+      "path": "experiments/tunepat-job-download-analysis.txt",
+      "bytes": 6608,
+      "sha256": "e1b7811cbb17f64b4836c7ba50ff8f0c2a32fbc8d59d142bd101c82e4c992c63"
+    },
+    {
+      "path": "experiments/tunepat-job-download-evidence.json",
+      "bytes": 12481,
+      "sha256": "bd4eeed52443eca1bb9505fe80896670107288ce948aad7c4a83a70ce6e6f133"
+    },
+    {
+      "path": "experiments/tunepat-nhk-auth-analysis.txt",
+      "bytes": 7904,
+      "sha256": "bfb195d474051589d8a5db0e498cb73974f66d26b8d4e6cf8e385081e8635b96"
+    },
+    {
+      "path": "experiments/tunepat-nhk-license-analysis.txt",
+      "bytes": 10544,
+      "sha256": "4b5ea1250cb470e591a69b226297452f4fabc265a2269b31b78830a932a0b89c"
+    },
+    {
+      "path": "experiments/tunepat-nhk-license-evidence.json",
+      "bytes": 16018,
+      "sha256": "8555a08c0355a217396e4240dde7a7109b553f1316966d77a8b95066fa176c63"
+    },
+    {
+      "path": "experiments/tunepat-nhk-license.mmd",
+      "bytes": 920,
+      "sha256": "4117b928421c3859ff968c0b11dc8f33773198f3ec500f5f7c6b0cd05412458f"
+    },
+    {
+      "path": "experiments/tunepat-result.json",
+      "bytes": 8289,
+      "sha256": "fb468af492c179ae63c16459d1de5b064011f946318df2c90a4e99f4659f1544"
+    },
+    {
+      "path": "experiments/tunepat-structure-inventory.json",
+      "bytes": 5308,
+      "sha256": "e51651031e82fc6d467266a5f3cdf20f5811c11e19fae4e907a3200fdf193be3"
+    },
+    {
+      "path": "experiments/tunepat-structure.mmd",
+      "bytes": 427,
+      "sha256": "40fd2308aaee1b6602e3e2ca7e9f7477ab2ca032677bb05bd68526690380da84"
+    },
+    {
+      "path": "experiments/tunepat-structure.txt",
+      "bytes": 10512,
+      "sha256": "f026a4abb25476724d1db3e8d22938efc9380500f501e7f885c8f27de4fe54b5"
+    },
+    {
+      "path": "experiments/webcodecs-console.txt",
+      "bytes": 5605,
+      "sha256": "41ce9efde3dedfa4675fbcc1051a9ec9e520a8447590cc6b723d57de8a1cdb01"
+    },
+    {
+      "path": "experiments/webcodecs-probe.js",
+      "bytes": 7811,
+      "sha256": "ec087de6de934cce32b71396784eb31ab95cdfb804eada653327a8db8f1f208b"
+    },
+    {
+      "path": "experiments/webcodecs-result.json",
+      "bytes": 1429,
+      "sha256": "4ca4c82c201d476d2bb9cd7d67def5b4c8756b3b96923321d5e805fa052e9de6"
+    },
+    {
+      "path": "nhk-connection.mjs",
+      "bytes": 9752,
+      "sha256": "accadbd659f84a01862b5e2cd2371832952b0809bdbacc35b9e9df5bcb509e4a"
+    },
+    {
+      "path": "nhk-connection.test.mjs",
+      "bytes": 4122,
+      "sha256": "c1a231be9539ce4e6bb3565cb8922cba033a39a748deef02c6b9a093684b28c4"
+    },
+    {
+      "path": "package-source.py",
+      "bytes": 4066,
+      "sha256": "1d081908d85ccf38fbbcd48a873dbeeebb1c26459cdd714f3de5e1c837b965b2"
+    }
+  ]
+}

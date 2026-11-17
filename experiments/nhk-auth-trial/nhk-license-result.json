@@ -1,0 +1,92 @@
+{
+  "timestamp_utc": "2026-10-10T14:05:45.513509+00:00",
+  "scope": "NHK ONE Q4YVTYHXB2 license authentication only; no video download or decryption",
+  "offline": false,
+  "license_endpoint": "https://licence.hsk.st.nhk/widevine/license",
+  "auth_source": "Existing user login in TunePat NHK browser partition; z_at cookie only",
+  "auth_header": "Authorization: Bearer [not retained]",
+  "other_explicit_headers": [
+    "Content-Type",
+    "Origin",
+    "Referer",
+    "User-Agent"
+  ],
+  "cookie_header_sent": false,
+  "token_refresh_requests": 0,
+  "max_http_attempts": 1,
+  "http_exchanges": [
+    {
+      "attempted": true,
+      "request_bytes": 1717,
+      "standard_certificate_request": false,
+      "http_status": 200,
+      "response_bytes": 1063
+    }
+  ],
+  "transport_error_type": null,
+  "exit_code": 0,
+  "cdm_events": [
+    {
+      "event": "host_interface_requested",
+      "value": 10
+    },
+    {
+      "event": "output_protection_query_unavailable",
+      "value": 0
+    },
+    {
+      "event": "initialized",
+      "value": 1
+    },
+    {
+      "event": "session_created_length",
+      "value": 32
+    },
+    {
+      "event": "session_message_type",
+      "value": 0
+    },
+    {
+      "event": "session_message_length",
+      "value": 1717
+    },
+    {
+      "event": "promise_resolved",
+      "value": 2
+    },
+    {
+      "event": "keys_usable",
+      "value": 1
+    },
+    {
+      "event": "key_count",
+      "value": 3
+    },
+    {
+      "event": "usable_key_count",
+      "value": 3
+    },
+    {
+      "event": "license_exchange_count",
+      "value": 1
+    },
+    {
+      "event": "session_closed",
+      "value": 0
+    },
+    {
+      "event": "promise_resolved",
+      "value": 100
+    },
+    {
+      "event": "finished",
+      "value": 0
+    }
+  ],
+  "usable_license": true,
+  "library_sha256": "c22f00b43796d3d2ffed7643291b68c8f51679111ff709ce3b4476b6997f4a06",
+  "probe_sha256": "dfb8038814faa808540c121d4396d1793844af770a71c281a87890654d75b4e0",
+  "sensitive_payloads_saved": false,
+  "authentication_data_sent_to_nhk": true,
+  "result_schema_note": "Privacy field clarified after execution; exchange and CDM observations unchanged."
+}

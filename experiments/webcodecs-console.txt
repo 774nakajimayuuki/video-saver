@@ -1,0 +1,39 @@
+The following is a diff from the previous accessibility tree for Window: "ファイターズ 日本一への道筋は | 北海道道 | NHK" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 441-443, 478
+~0 標準ウインドウ ファイターズ 日本一への道筋は | 北海道道 | NHK - Google Chrome - Y (Yuuki), URL: web.nhk/tv/an/hokkaidodo/pl/series-tep-2J211716Z5/ep/Q4YVTYHXB2, Secondary Actions: Raise
+~	1 container ファイターズ 日本一への道筋は | 北海道道 | NHK - Google Chrome - Y (Yuuki), URL: web.nhk/tv/an/hokkaidodo/pl/series-tep-2J211716Z5/ep/Q4YVTYHXB2
+~															375 container 12 messages in console
+~																378 row (selected)    6 messages
++																	478 テキスト 6 messages
+~																381 row    6 user messages
++																	479 テキスト 6 user messages
+~																390 row    6 info
++																	480 テキスト 6 info
++																	481 container WEBCODECS_CONTROL {"source":{"width":64,"height":48,"currentTime":0,"paused":true,"readyState":4,"mediaKeysAttached":false},"frameCreated":true,"pixelsReadable":true,"format":"NV12","width":64,"height":48,"rgbMaximum":255,"nonDarkFraction":1,"nonTransparentFraction":1}
++																		482 container  WEBCODECS_CONTROL {"source":{"width":64,"height":48,"currentTime":0,"paused":true,"readyState":4,"mediaKeysAttached":false},"frameCreated":true,"pixelsReadable":true,"format":"NV12","width":64,"height":48,"rgbMaximum":255,"nonDarkFraction":1,"nonTransparentFraction":1} Stack table collapsed
++																			483 container
++																				484 リンク VM278:63, Help: debugger:///VM278:63
++																					485 テキスト VM278:63
++																				486 text WEBCODECS_CONTROL {"source":{"width":64,"height":48,"currentTime":0,"paused":true,"readyState":4,"mediaKeysAttached":false},"frameCreated":true,"pixelsReadable":true,"format":"NV12","width":64,"height":48,"rgbMaximum":255,"nonDarkFraction":1,"nonTransparentFraction":1}
++																	487 container WEBCODECS_NHK_0 {"source":{"width":960,"height":540,"currentTime":503.070554,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}}
++																		488 container  WEBCODECS_NHK_0 {"source":{"width":960,"height":540,"currentTime":503.070554,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}} Stack table collapsed
++																			489 container
++																				490 リンク VM278:64, Help: debugger:///VM278:64
++																					491 テキスト VM278:64
++																				492 text WEBCODECS_NHK_0 {"source":{"width":960,"height":540,"currentTime":503.070554,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}}
++																	493 container WEBCODECS_NHK_1 {"source":{"width":960,"height":540,"currentTime":503.405947,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}}
++																		494 container  WEBCODECS_NHK_1 {"source":{"width":960,"height":540,"currentTime":503.405947,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}} Stack table collapsed
++																			495 container
++																				496 リンク VM278:64, Help: debugger:///VM278:64
++																					497 テキスト VM278:64
++																				498 text WEBCODECS_NHK_1 {"source":{"width":960,"height":540,"currentTime":503.405947,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}}
++																	499 container WEBCODECS_NHK_2 {"source":{"width":960,"height":540,"currentTime":503.806279,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}}
++																		500 container  WEBCODECS_NHK_2 {"source":{"width":960,"height":540,"currentTime":503.806279,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}} Stack table collapsed
++																			501 container
++																				502 リンク VM278:64, Help: debugger:///VM278:64
++																					503 テキスト VM278:64
++																				504 text WEBCODECS_NHK_2 {"source":{"width":960,"height":540,"currentTime":503.806279,"paused":false,"readyState":4,"mediaKeysAttached":true},"frameCreated":false,"error":{"name":"InvalidStateError","message":"Failed to construct 'VideoFrame': Invalid source state"}}
+~								190 ボタン ファイターズ 日本一への道筋は 26分30秒 再生する
+~									196 ボタン 再生する
+~					300 タブ (selected, settable, boolean) ファイターズ 日本一への道筋は | 北海道道 | NHK - メモリ使用量 - 414 MB, Value: on
+The focused UI element is 399 テキスト入力領域 (settable) Console prompt, Value: 

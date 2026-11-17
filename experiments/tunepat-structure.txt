@@ -1,0 +1,177 @@
+TunePat VideoGo All-In-One：初期構造解析
+確認日：2026-10-10（日本時間）
+対象：このMacにインストールした3.1.0 Appleシリコン版
+
+最新の統合結果：tunepat-end-to-end-analysis.txt
+以下は初期時点の記録。後続の解析で更新された項目は総合報告を優先する。
+
+追記：同日、保存時の既存ログと追加の静的解析を照合した。
+更新結果はtunepat-handoff-analysis.txt、構成図はtunepat-handoff.mmdを参照。
+今回のNHK保存でmedia_handle・FFmpeg・wv_shellが動作し、独自入力から
+H.264への再圧縮が実行されたことを確認した。以下は初期調査時点の記録であり、
+「今回の担当プロセス」「生成経路」「再圧縮」に関する未確定事項の一部は更新済み。
+
+結論
+
+TunePatは、Electronによる画面・ブラウザ、コンパイル済みの制御コード、
+サービス別のページ内スクリプト、Mac用の映像処理部品から構成されている。
+NHK専用の部品があり、「動画の検出」からアプリ側へ通知を送る処理を確認できた。
+Widevineと独自の復号関連ライブラリが実際に同じ補助プロセスにロードされていた。
+この初期調査で、各部品の存在と一部の接続は確認できたが、
+NHKの1件の保存について、全関数の実行順や映像の受け渡し方式は確定していない。
+
+解析対象の場所
+
+APP = /Applications/TunePat VideoGo All-In-One.app/Contents/Resources/app
+RUN = /Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video
+
+RUN配下のmain・renderer・native・resourceは、今回確認したアプリの実行部品。
+ブラウザのCookie、パスワード、ログイン情報のデータベースは解析対象にしていない。
+対象ファイルのサイズとSHA-256はtunepat-structure-inventory.jsonに記録した。
+
+1. 起動・部品管理【コードと配置で確認】
+
+APP/package.json のエントリーポイントはmain.js。
+APP/main.jsは約1.08MBの難読化されたJavaScript。
+構成部品の配置先componentRunningDir、更新部品の配置、componments.jsonの
+読み書きに関する処理があり、/Applicationsの中だけでは実装が完結していない。
+MacではCPU種別に応じてmain.jscまたはmain_<arch>.jscを選択する処理を確認。
+このMacのRUN/main/main_arm64.jscは6,441,496 bytes。
+Electron FrameworkのInfo.plistに記録されたバージョンは35.1.5。
+
+2. 画面【読み込み処理を確認】
+
+RUN/renderer/index.htmlはchunk-vendors.jsとapp.jsを読み込む。
+app.jsにはBytenodeの読み込み処理とCPU別のファイル選択処理があり、
+Mac arm64ではrenderer_arm64.jscを選ぶ。該当ファイルは3,307,376 bytes。
+主な画面の実装は、通常のJavaScriptソースとしてそのまま読める形ではない。
+BytenodeはJavaScriptをV8のバイトコードに変換する仕組み。
+技術資料：https://github.com/bytenode/bytenode
+
+3. NHK専用の処理【専用登録、スクリプト、通知を確認】
+
+RUN/main/config/moduleCatalog.jsonに、moduleId=nhk、appType=nhk、
+displayName=NHK ONE Downloaderという登録がある。
+RUN/main/preload/nhkには、i.js（1,014,680 bytes）とp.js（200,533 bytes）がある。
+両方とも難読化されているが、文字列表の一部を静的に解決できた。
+
+確認できた通知の流れ：
+  「動画の検出」ボタン
+    → onClickDownload
+    → sendToRendererという名前のメソッドにfetch-dataを渡す
+    → 内部でipcRenderer.sendを呼ぶ
+    → Electronのメインプロセスへ通知
+
+メソッド名はsendToRendererだが、実際に呼んでいるAPIの送信先はメインプロセス。
+RUN/main/main_arm64.jsc内にもfetch-dataという文字列が存在する。
+ただし、バイトコード内の受信ハンドラーの全制御フローまでは復元していない。
+APIの意味の確認：https://www.electronjs.org/docs/latest/api/ipc-renderer#ipcrenderersendchannel-args
+
+p.jsにはvideo要素の再生・停止や、ページ要素によるログイン状態の判定処理がある。
+メインのバイトコードにはNHKParser・NHKParserUtil・NHKVP・NHKDLという
+ログ用識別子、エピソードURLのパターン、manifestに関連する文字列が存在する。
+これは番組情報の解析、再生ページの制御、保存処理の分離を示唆する。
+各名称の完全な責務は、文字列だけから断定しない。
+
+4. Mac用の映像処理部品【ファイル・依存関係・一部のロードを確認】
+
+RUN/nativeには主に次の部品がある。
+
+media_handle
+  アプリ本体の子プロセスとして起動中だった。
+  libIpcManagerとlibavutilへの依存があり、Convert・Record等のクラス関連文字列がある。
+  どのNHK処理を担当したかは未確定。
+
+libMediaConvert.dylib
+  アプリ本体にロードされていた。
+  FFmpeg系のlibavcodec・libavformat・libavutil、AVFoundationなどに依存。
+
+libTranscodeDLL.dylib / libTranscodeRecord.dylib
+  FFmpeg系の映像変換部品とプロセス間通信部品に依存する。
+  今回のプロセス一覧の観測時点ではロードを確認していない。
+
+librecord_lib.dylib
+  複数のRenderer補助プロセスにロードされていた。
+  録画向けの部品の存在は確認できるが、NHK保存に使用された証拠とはならない。
+
+libdecrypt.dylib / wv_shell
+  libdecryptはWidevineを読み込む補助プロセスにロードされていた。
+  wv_shellはファイルとして存在し、FFmpeg系ライブラリ・IPC・Protobufに依存する。
+  この観測時点ではwv_shellという名前の実行中プロセスは確認していない。
+  両ファイルにh264_videotoolboxという文字列が存在する。
+
+native/yt-dlp/yt-dlp
+  同梱されているが、今回のNHK保存で使われたとは確認していない。
+
+5. Widevineと独自部品の境界【配置と実ロードを確認、順序は推定】
+
+CDMに関係するファイルが複数存在する。
+  A. native/WidevineCdm/.../libwidevinecdm.dylib：約70KB
+  B. native/sig_files/libwidevinecdm.dylib：約20MB
+
+AはCDMの初期化・生成等のインターフェースをエクスポートし、
+内部の文字列に/libdecrypt.dylibへの参照を持つ。
+実行時に別のWidevineCdmディレクトリからロードされていた小さいCDMファイルは、
+AとSHA-256が一致した。
+
+観測した補助プロセスPID 22033には、
+  小さいCDMインターフェースのファイル
+  native/libdecrypt.dylib
+  native/sig_files/libwidevinecdm.dylib
+が同時にロードされていた。
+
+したがって、小さい部品が独自処理へ橋渡しする構造である可能性が高い。
+ただし、正確な呼び出し順、復号後データの形式、鍵の扱い、NHK保存時の
+分岐条件までは確認していない。ファイル名だけを根拠に内部動作を決めつけない。
+
+6. 先ほど保存したMP4との対応【実測と整合、生成経路は未確定】
+
+MP4のエンコーダ情報：Lavc59.38.100 h264_videotoolbox
+コンテナの生成情報：Lavf59.28.100
+同梱ライブラリのバージョン：libavcodec 59.38.100 / libavformat 59.28.100
+これらは一致するため、同梱の映像処理部品による再エンコードと整合する。
+ただし、タグとライブラリの一致だけでは、どの関数・プロセスが出力したかや、
+元の配信映像に対する画質の損失量までは確定できない。
+
+保存済みファイル：300.010667秒、1920×1080、24000/1001 fps、
+H.264映像＋AACステレオ音声、256,832,631 bytes。
+5分間の映像・音声をデコードできたことは前回の保存テストで確認済み。
+詳しい値はtunepat-result.json、画像確認はtunepat-contact-sheet.jpgを参照。
+
+7. 構造から判断できること
+
+・NHK専用の検出・解析・ページ操作の部品がある。
+・アプリの中核は、コンパイル済みの制御コードと独自のネイティブ部品にも依存する。
+・通常のブラウザに同じページを開くだけで、保存機能を再現できるとは考えにくい。
+・同梱ライブラリや動作中プロセスの情報から、次に詳しく調べる境界を絞れた。
+
+まだ判断できないこと
+
+・暗号化された動画の受信から最終MP4までの、1件ごとの完全なデータフロー。
+・配信映像を取得・復号して再圧縮する方式か、復号済みフレームを別経路で
+  取得する方式か、その切替条件。
+・24fpsや約6.65Mbpsという出力設定の決まり方。
+・独自部品なしで同等の保存機能を実装できるか。
+
+8. 方法と限界
+
+実施したこと：
+・アプリ構成、設定用メタデータ、配布されたコードファイルの読み取り。
+・難読化JavaScriptの文字列表と単純な数値式の静的な解決。
+・バイトコードやネイティブファイルの文字列、公開シンボル、依存ライブラリの確認。
+・既に起動しているTunePat関連プロセスの名前と、ロード済みコードのパスの確認。
+
+解析対象のJavaScriptやバイトコードを解析用に実行してはいない。
+アプリ本体の改変、メモリ内容の取得、保存テストの再実行は行っていない。
+プロセス観測は保存完了後の1時点であり、保存中の実行トレースではない。
+
+inspect_tunepat_strings.pyは完全な逆コンパイラではない。
+単純な文字列表の回転と参照を解決し、コードの読み取りを補助する。
+エイリアス探索は完全なスコープ解析ではないため、置換結果だけで複雑な
+制御フローを断定しない。4つの対象JavaScriptで数値式の一致と参照解決を確認した。
+
+次に絞って調べる境界
+
+検出イベントを受けたメイン制御から、ネイティブ映像処理への受け渡し部分。
+必要になるのは、1回の保存に対応する処理開始・終了、担当プロセス、出力設定の
+対応付けである。構造解析の結果だけで、DRMの内部や保存方式全体を解明済みとはしない。

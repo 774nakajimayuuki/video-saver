@@ -1,0 +1,83 @@
+TunePat 構造解析：進捗と報告書
+日付：2026-10-10
+
+現在の目的
+保存開始からMP4出力までの主要な処理とデータの受け渡しをつなぎ、
+確認できた事実・推定・未確認事項を整理する。
+
+完了した範囲
+1. アプリの構成とNHK専用の処理
+   tunepat-structure.txt
+2. 制御側から映像処理プロセスへの受け渡し、既存保存ログとの照合
+   tunepat-handoff-analysis.txt
+3. ReadHeader / ReadPacket / media_decoderの引数・データ形式・寿命
+   tunepat-frame-boundary-analysis.txt
+4. CDMのフレーム生成インターフェースと、共有メモリによる受け渡し
+   tunepat-decode-transport-analysis.txt
+5. 保存ジョブの設定、配信ファイル取得の依頼・結果、断片の読み込み
+   tunepat-job-download-analysis.txt
+6. 保存開始からMP4出力までの統合、確認済み部分と独立実装に不足する部分の整理
+   tunepat-end-to-end-analysis.txt / tunepat-end-to-end.mmd
+
+到達点
+今回の構造解析は一巡を完了。主要な部品の担当とデータの受け渡しを確認した。
+全コードの逆コンパイルや、TunePatを使わない独立実装は未完了の別工程。
+未確定事項と根拠の強さは総合報告書に記載。
+
+最終照合
+6バイナリのハッシュ、8報告ファイル、取得要求7項目の確認に成功。
+確認結果：tunepat-analysis-verification.json
+
+後続の最小試作（同日）
+minimal-trial-report.txt
+自作ホストでCDM初期化、2秒の自作映像の48フレーム取得、MP4保存に成功。
+公開テストのライセンス送信は、ユーザーの1回の承認後に実施し成功。
+HTTP 200に加え、CDMで利用可能な鍵4件を確認。public-license-trial-report.txtを参照。
+さらに、公開素材の暗号化された映像100・音声187サンプルの復号と、
+再圧縮なしの音声付き4秒MP4保存に成功。public-media-trial-report.txtを参照。
+NHK ONEの独立保存はまだ成功していない。
+
+解析と再実装を区別する
+既存の5分保存は成功済み。ここで進めているのは、保存経路の構造解析。
+独自ライブラリを置き換えたアプリを実装・検証済みという意味ではない。
+
+NHKライセンス取得経路の追加解析（同日）
+tunepat-nhk-license-analysis.txt
+ブラウザー側のCDM入口から独自の中継部品、別プロセスの保存用CDMまでを追跡。
+既存NHK保存ログで、ライセンスURLの検出、要求・応答の中継、
+利用可能な鍵3件、license succeededを確認した。
+応答処理と成功記録が同じブラウザー側セッションであることも照合済み。
+ネイティブ15関数と既存ログ21件を検証。根拠はtunepat-nhk-license-evidence.json。
+新しい外部通信やアプリ変更は行っていない。
+HTTP認証条件と要求の再発行・加工の全分岐は未復元で、NHKの独立取得は未実証。
+
+NHK認証の最小再現（同日23:05、後続結果）
+tunepat-nhk-auth-analysis.txt
+NHK公開コードで z_at Cookie → 視聴用トークン → Authorization: Bearer の経路を確認。
+ユーザーが明示承認した1回の通信で、自作プログラムからNHKのライセンス認証に成功。
+HTTP 200、応答1,063 bytes、CDMで利用可能な鍵3件、終了コード0。
+TunePatの制御処理は使用せず、既存ログイン状態とインストール済みCDMを参照した。
+根拠：nhk-auth-trial/nhk-license-result.json、auth-evidence.json。
+公開コード4本と実試験を照合し、模擬通信の制限確認4件も成功。
+NHKの動画復号・MP4保存、アプリ専用ブラウザーでのログイン・更新は未確認。
+
+CDM依存の置き換え（同日23:44）
+cdm-replacement-report.txt
+Chrome同梱のAppleシリコン用CDM 4.10.3112.0で、初期化と要求生成に成功。
+ユーザーが別途承認した1回のNHK通信でもHTTP 200、鍵3件利用可能、終了コード0。
+認証試作の既定CDMをChromeへ切り替え、TunePat CDMへの自動フォールバックは設けない。
+ログイン状態は引き続きTunePat参照。GoogleのCDM依存と、配布条件の確認は残る。
+根拠：nhk-auth-trial/chrome-license-result.json、chrome-cdm-verification.json。
+
+2026-10-11：アプリ自身のNHKログイン画面とCDM部品の分離
+Video Saver 0.3.0にWKWebViewの専用ログイン画面を追加。公式ログイン画面への遷移まで確認。ユーザーのログイン完了は未確認。
+検証済みGoogle CDMをローカル試作用にアプリ内へコピーし、公開インターフェース10で初期化成功。外部通信なし。一般配布の許諾は未確認。
+状態判定16項目・アプリの厳密な署名検証が成功。NHKの保存処理は未接続、新規ライセンス送信0回。
+詳しくはstandalone-app-report.txt、standalone-app-verification.jsonを参照。
+
+2026-10-11 00:14：Video Saver自身のログインと同梱CDMでNHK認証成功
+ユーザー自身のアプリ内ログインを確認。再起動後も維持。匿名パイプで認証情報を渡す処理を追加。
+明示承認された1回のNHKライセンス送信：HTTP 200、要求1,717 bytes、応答1,063 bytes、利用可能な鍵3件、終了コード0。
+TunePat・Chromeのインストール先や認証情報は参照せず、アプリ内の部品だけで実行した。
+セッションは終了済み。動画取得・復号・MP4出力は未実施。実行済み記録で再送を防ぐ。
+証跡：own-session-license-result.json、own-session-license-attempt.json、own-session-authenticated-screen.png。

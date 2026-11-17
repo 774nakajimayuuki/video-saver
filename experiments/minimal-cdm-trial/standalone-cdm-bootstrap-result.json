@@ -1,0 +1,84 @@
+{
+  "timestamp": "2026-10-10T14:57:37.921112+00:00",
+  "library_sha256": "e1e9f6b0c77f4251542a2f49dda419c85eda88c5d9ef2721d5d594dc195a6e5f",
+  "source_sha256": "7f9bdcb6c813b18f5626db25febabd30e500f77d1d05db7faad642d3b7f4f54f",
+  "scope": "Public CDM load/create/initialize/destroy only. No license requests or media download.",
+  "host_features": {
+    "persistent_state": false,
+    "distinctive_identifier": false,
+    "hardware_secure_codecs": false,
+    "platform_challenge": "unavailable",
+    "output_protection_status": "unavailable"
+  },
+  "trials": [
+    {
+      "interface_version": 10,
+      "exit_code": 0,
+      "timeout": false,
+      "events": [
+        {
+          "event": "load_begin",
+          "value": 0
+        },
+        {
+          "event": "load_success",
+          "value": 0
+        },
+        {
+          "event": "module_initialize_begin",
+          "value": 0
+        },
+        {
+          "event": "module_initialize_complete",
+          "value": 0
+        },
+        {
+          "event": "create_begin",
+          "value": 10
+        },
+        {
+          "event": "host_interface_requested",
+          "value": 10
+        },
+        {
+          "event": "instance_created",
+          "value": 1
+        },
+        {
+          "event": "initialize_begin",
+          "value": 0
+        },
+        {
+          "event": "output_protection_query_unavailable",
+          "value": 0
+        },
+        {
+          "event": "initialized",
+          "value": 1
+        },
+        {
+          "event": "destroy_begin",
+          "value": 0
+        },
+        {
+          "event": "destroy_complete",
+          "value": 0
+        },
+        {
+          "event": "module_deinitialize_begin",
+          "value": 0
+        },
+        {
+          "event": "module_deinitialize_complete",
+          "value": 0
+        },
+        {
+          "event": "finished",
+          "value": 0
+        }
+      ],
+      "elapsed_seconds": 0.977,
+      "initialized": true
+    }
+  ]
+}

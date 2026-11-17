@@ -1,0 +1,65 @@
+{
+  "CONTROL": {
+    "source": {
+      "width": 64,
+      "height": 48,
+      "currentTime": 0,
+      "paused": true,
+      "readyState": 4,
+      "mediaKeysAttached": false
+    },
+    "frameCreated": true,
+    "pixelsReadable": true,
+    "format": "NV12",
+    "width": 64,
+    "height": 48,
+    "rgbMaximum": 255,
+    "nonDarkFraction": 1,
+    "nonTransparentFraction": 1
+  },
+  "NHK_0": {
+    "source": {
+      "width": 960,
+      "height": 540,
+      "currentTime": 503.070554,
+      "paused": false,
+      "readyState": 4,
+      "mediaKeysAttached": true
+    },
+    "frameCreated": false,
+    "error": {
+      "name": "InvalidStateError",
+      "message": "Failed to construct 'VideoFrame': Invalid source state"
+    }
+  },
+  "NHK_1": {
+    "source": {
+      "width": 960,
+      "height": 540,
+      "currentTime": 503.405947,
+      "paused": false,
+      "readyState": 4,
+      "mediaKeysAttached": true
+    },
+    "frameCreated": false,
+    "error": {
+      "name": "InvalidStateError",
+      "message": "Failed to construct 'VideoFrame': Invalid source state"
+    }
+  },
+  "NHK_2": {
+    "source": {
+      "width": 960,
+      "height": 540,
+      "currentTime": 503.806279,
+      "paused": false,
+      "readyState": 4,
+      "mediaKeysAttached": true
+    },
+    "frameCreated": false,
+    "error": {
+      "name": "InvalidStateError",
+      "message": "Failed to construct 'VideoFrame': Invalid source state"
+    }
+  }
+}

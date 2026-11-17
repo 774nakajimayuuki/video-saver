@@ -1,0 +1,78 @@
+{
+  "scope": "Official Shaka public test asset; no NHK session or account data used",
+  "timestamp_utc": "2026-10-10T12:28:11.654030+00:00",
+  "offline": false,
+  "max_http_attempts": 1,
+  "request_limit_reached": false,
+  "license_url": "https://proxy.uat.widevine.com/proxy",
+  "library_sha256": "c22f00b43796d3d2ffed7643291b68c8f51679111ff709ce3b4476b6997f4a06",
+  "exit_code": 0,
+  "transport_error_type": null,
+  "http_exchanges": [
+    {
+      "request_bytes": 1713,
+      "attempted": true,
+      "http_status": 200,
+      "response_bytes": 1099
+    }
+  ],
+  "cdm_events": [
+    {
+      "event": "host_interface_requested",
+      "value": 10
+    },
+    {
+      "event": "output_protection_query_unavailable",
+      "value": 0
+    },
+    {
+      "event": "initialized",
+      "value": 1
+    },
+    {
+      "event": "session_created_length",
+      "value": 32
+    },
+    {
+      "event": "session_message_type",
+      "value": 0
+    },
+    {
+      "event": "session_message_length",
+      "value": 1713
+    },
+    {
+      "event": "promise_resolved",
+      "value": 2
+    },
+    {
+      "event": "keys_usable",
+      "value": 1
+    },
+    {
+      "event": "key_count",
+      "value": 4
+    },
+    {
+      "event": "usable_key_count",
+      "value": 4
+    },
+    {
+      "event": "license_exchange_count",
+      "value": 1
+    },
+    {
+      "event": "session_closed",
+      "value": 0
+    },
+    {
+      "event": "promise_resolved",
+      "value": 100
+    },
+    {
+      "event": "finished",
+      "value": 0
+    }
+  ],
+  "usable_license": true
+}

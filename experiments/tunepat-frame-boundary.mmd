@@ -1,0 +1,7 @@
+flowchart TD
+  A["上流の独自処理<br/>復号・デコードの詳細は未復元"] -.-> B["画素データと付随情報<br/>MediaDataBuffer"]
+  B --> C["ReadPacket<br/>AVPacketにデータ参照・時刻を設定"]
+  C --> D["media_decoder<br/>幅・高さ・画素面の配置を引き継ぐ"]
+  D --> E["FFmpegのAVFrame<br/>画素バッファへの参照を保持"]
+  E --> F["H.264へ再圧縮してMP4保存<br/>前回のログで確認"]
+  M["独自の付随情報 48バイト<br/>寸法・画素形式・3画素面の配置"] --> C

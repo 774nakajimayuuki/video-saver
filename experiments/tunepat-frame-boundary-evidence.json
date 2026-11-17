@@ -1,0 +1,221 @@
+{
+  "date_jst": "2026-10-10",
+  "scope": "Static analysis of installed ARM code only. No private API execution, process attachment, memory read, new download, or application modification.",
+  "sources": {
+    "libavformat.59.dylib": {
+      "sha256": "f325724468977c07a7ce58d723cc6e436de348a6ed1541ac1c39e0356ac7c4d7",
+      "bytes": 3330464
+    },
+    "libavcodec.59.dylib": {
+      "sha256": "c064c1c8640239f83d5b0736ef20292ac416b933a43f06dd74f5802da432a687",
+      "bytes": 25042784
+    },
+    "libTranscodeDLL.dylib": {
+      "sha256": "e1cfc9c4bd57b9ebaea397002f0b879536f03575b275d7123ecc8b09816858ca",
+      "bytes": 11916496
+    }
+  },
+  "verified_instruction_checks": [
+    {
+      "file": "libTranscodeDLL.dylib",
+      "virtual_address": "0x534c",
+      "instruction_word": "0xaa0003f3",
+      "fact": "ReadHeader retains its first argument"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "virtual_address": "0x58d4",
+      "instruction_word": "0xaa0103f3",
+      "fact": "ReadPacket retains its second argument as packet output"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "virtual_address": "0x5a4c",
+      "instruction_word": "0x52800600",
+      "fact": "Packet metadata allocation is 48 bytes"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "virtual_address": "0x5aac",
+      "instruction_word": "0xf9000260",
+      "fact": "Created AVBufferRef is stored at packet +0x00"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "virtual_address": "0x5ad0",
+      "instruction_word": "0xf9002a76",
+      "fact": "Auxiliary metadata is stored at packet +0x50"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "virtual_address": "0x5b18",
+      "instruction_word": "0xb90012df",
+      "fact": "Video metadata pixel format is set to zero"
+    },
+    {
+      "file": "libavformat.59.dylib",
+      "virtual_address": "0x152cf4",
+      "instruction_word": "0xd63f0100",
+      "fact": "Resolved ReadHeader function is called indirectly"
+    },
+    {
+      "file": "libavformat.59.dylib",
+      "virtual_address": "0x15328c",
+      "instruction_word": "0xd63f0100",
+      "fact": "Resolved ReadPacket function is called indirectly"
+    },
+    {
+      "file": "libavcodec.59.dylib",
+      "virtual_address": "0xeb9628",
+      "instruction_word": "0xf9402874",
+      "fact": "Decoder reads packet opaque at +0x50"
+    },
+    {
+      "file": "libavcodec.59.dylib",
+      "virtual_address": "0xeb9638",
+      "instruction_word": "0xb9007428",
+      "fact": "Decoder assigns frame format at +0x74"
+    },
+    {
+      "file": "libavcodec.59.dylib",
+      "virtual_address": "0xeb9654",
+      "instruction_word": "0xf90072a8",
+      "fact": "Decoder stores a retained buffer in frame buf[0]"
+    },
+    {
+      "file": "libavcodec.59.dylib",
+      "virtual_address": "0xeb9664",
+      "instruction_word": "0xea00800",
+      "fact": "Decoder swaps metadata height/width word order"
+    },
+    {
+      "file": "libavcodec.59.dylib",
+      "virtual_address": "0xeb96b8",
+      "instruction_word": "0xb9000268",
+      "fact": "Decoder marks a frame as produced"
+    }
+  ],
+  "function_ranges": [
+    {
+      "file": "libTranscodeDLL.dylib",
+      "label": "Initialize",
+      "start": "0x5104",
+      "end_exclusive": "0x5264",
+      "sha256": "7373ffcf5e0c491739842bf50f02338e80b559ec4a12259c08a3fcc81a5d71a4"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "label": "Deinitialize",
+      "start": "0x5264",
+      "end_exclusive": "0x5328",
+      "sha256": "46f8562f0cd6cb3d163622f5d5715f133e2fd32ff56fee5d182fe2da73ec9619"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "label": "ReadHeader",
+      "start": "0x5328",
+      "end_exclusive": "0x58b4",
+      "sha256": "11daa48af93afcc328c20d7a6a529cd9e23c0298ade98990b004b0b886687d04"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "label": "ReadPacket",
+      "start": "0x58b4",
+      "end_exclusive": "0x610c",
+      "sha256": "2ae68b9e54570cd034d1cb0943dbaa07d1dd0b26d906ed18d3305c411ce19a4a"
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "label": "PacketFromPlainBuffer release callback",
+      "start": "0x67b8",
+      "end_exclusive": "0x6820",
+      "sha256": "0be85f79fb85b003d21f1fd4a40a9d652b42c48f09afa08d338b46ddc4316f72"
+    },
+    {
+      "file": "libavformat.59.dylib",
+      "label": "Custom input initialization/header",
+      "start": "0x152b90",
+      "end_exclusive": "0x153278",
+      "sha256": "4e70dbd871d89c32099245535ea816a78d1aef17fb69a3bc41b6d29bfd6c3dca"
+    },
+    {
+      "file": "libavformat.59.dylib",
+      "label": "Custom input packet callback",
+      "start": "0x153278",
+      "end_exclusive": "0x1532b8",
+      "sha256": "1efb56919bfbd9b8b58b9a810638103ac6dad810b56b1c1e88f976cf75bbd8ae"
+    },
+    {
+      "file": "libavcodec.59.dylib",
+      "label": "media_decoder decode callback",
+      "start": "0xeb9610",
+      "end_exclusive": "0xeb96ec",
+      "sha256": "58b023fddf3b2676ad1d07bfe99d7b6f298ddd5fd736dd4f7ffdccc903ef5f53"
+    }
+  ],
+  "custom_input": {
+    "library_selection_table": [
+      "libTranscodeDLL.dylib",
+      "libTranscodeRecord.dylib"
+    ],
+    "resolved_entries": [
+      "Initialize",
+      "Deinitialize",
+      "ReadHeader",
+      "ReadPacket"
+    ]
+  },
+  "media_decoder": {
+    "descriptor": "0x1751aa0",
+    "decode_callback": "0xeb9610",
+    "retained_buffer_function": "av_buffer_ref",
+    "retained_buffer_stub": "0x1269e94"
+  },
+  "metadata_projection": {
+    "size": 48,
+    "offsets": {
+      "owner_holder": "0x0",
+      "height": "0x8",
+      "width": "0xc",
+      "pixel_format": "0x10",
+      "plane_offsets": "0x14",
+      "line_sizes": "0x20"
+    },
+    "caution": "Analyst-assigned names. Partial observed contract, not an original header or a callable SDK."
+  },
+  "reconstructed_api_shapes": [
+    {
+      "name": "Initialize",
+      "shape": "status Initialize()",
+      "confidence": "No incoming argument use observed; initializes IPC, reader, convert, and memory pool."
+    },
+    {
+      "name": "ReadHeader",
+      "shape": "status ReadHeader(AVFormatContext *context)",
+      "confidence": "First argument is passed to avformat_new_stream; writes streams and codec parameters."
+    },
+    {
+      "name": "ReadPacket",
+      "shape": "status ReadPacket(AVFormatContext *context, AVPacket *out)",
+      "confidence": "Caller forwards context and packet; implementation populates packet argument. Context is unused by the observed exported body."
+    },
+    {
+      "name": "Deinitialize",
+      "shape": "status Deinitialize()",
+      "confidence": "No incoming argument use observed; requests Convert exit and returns zero."
+    }
+  ],
+  "references": [
+    "https://ffmpeg.org/doxygen/5.1/packet_8h_source.html",
+    "https://ffmpeg.org/doxygen/5.1/frame_8h_source.html",
+    "https://ffmpeg.org/doxygen/5.1/codec__internal_8h_source.html",
+    "https://ffmpeg.org/doxygen/5.1/pixfmt_8h_source.html"
+  ],
+  "limitations": [
+    "No runtime call tracing for these functions was performed.",
+    "No original compressed video or decoded frame pixels were extracted.",
+    "The upstream production of MediaDataBuffer, full IPC contract, and DRM internals remain untraced.",
+    "Ownership observations apply to this local packet-to-frame boundary; end-to-end zero-copy is not established.",
+    "Public FFmpeg 5.1 definitions are comparison material; the bundled custom build is not assumed identical in every field."
+  ]
+}

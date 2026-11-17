@@ -1,0 +1,28 @@
+[
+  {
+    "track": "video",
+    "url": "https://storage.googleapis.com/shaka-demo-assets/angel-one-widevine/v-0480p-1000k-libx264.mp4",
+    "file": "public-video-cenc.mp4",
+    "range": [
+      3536360,
+      3783942
+    ],
+    "source_start_seconds": 12.0,
+    "duration_seconds": 4.0,
+    "bytes": 248893,
+    "sha256": "34df7790feed87358b4bd822e23f695b8838b8a16055a163b86daf5cbcc315d7"
+  },
+  {
+    "track": "audio",
+    "url": "https://storage.googleapis.com/shaka-demo-assets/angel-one-widevine/a-eng-0128k-aac-2c.mp4",
+    "file": "public-audio-cenc.mp4",
+    "range": [
+      185840,
+      252619
+    ],
+    "source_start_seconds": 12.010666666666667,
+    "duration_seconds": 3.989333333333333,
+    "bytes": 68034,
+    "sha256": "d46956fb7e1d615025a1e89b5d3050ab62d76789ae6798364d07572add38e99d"
+  }
+]

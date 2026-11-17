@@ -1,0 +1,55 @@
+# macOS metadata
+.DS_Store
+._*
+
+# Build output and caches
+.build-cache/
+.build/
+DerivedData/
+*.app/
+*.dSYM/
+*.o
+*.dylib
+*.so
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+
+# Locally supplied binaries and source archives
+/yt-dlp
+/local-components/
+/exports/
+/experiments/nhk-auth-trial/public-scripts/
+/experiments/minimal-cdm-trial/cdm_probe
+/experiments/minimal-cdm-trial/decode_probe
+/experiments/minimal-cdm-trial/license_probe
+
+# Local credentials and browser/session data
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+cookies.txt
+cookies.json
+Cookies
+Cookies-journal
+Cookies-wal
+Cookies-shm
+
+# Downloaded/generated media and raw experiment payloads
+.video-saver-*/
+*.mp4
+*.mkv
+*.webm
+*.mov
+*.m4a
+*.aac
+*.wav
+*.yuv
+*.pcm
+*.bin
+# Public initialization data required by build.sh (not a credential).
+!/experiments/nhk-auth-trial/nhk-init-data.bin

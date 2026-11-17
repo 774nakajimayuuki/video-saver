@@ -1,0 +1,12 @@
+[
+  {
+    "track": "video",
+    "without_license_decode_exit_code": 183,
+    "raw_logs_saved": false
+  },
+  {
+    "track": "audio",
+    "without_license_decode_exit_code": 183,
+    "raw_logs_saved": false
+  }
+]

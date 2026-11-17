@@ -1,0 +1,39 @@
+{
+  "python_syntax_passed": true,
+  "source_and_binary_sha256": {
+    "license_probe.cpp": "372d1563a7207459faaf3d007308c0bdb5a1f043235aa3c380b2b2ecdd9f3db7",
+    "decrypt_samples.h": "6f22cc423d209880be54a703f42ad055a2317e60a3d9f2c52a80a61cf969c076",
+    "license_probe": "dfb8038814faa808540c121d4396d1793844af770a71c281a87890654d75b4e0",
+    "public_cenc_fixture.py": "5bcc3eecc3b4979717a847b5cbfd429a6cbed552778576bee57353ad1186d899",
+    "verify_public_media.py": "153e2406e663003ed4eacde29430bcf4ce0c2ec66548b9c5326d2006cab1ddd0",
+    "run_public_license.py": "897beb4ef48003c5a8c9662ee30f0f5d0d8dd64443190c79e2cf9e63594148dd",
+    "public-cenc-fixture.bin": "3588d0814aa13d7157d91816911581bae76ac330645494f9bc5b1e665763d430"
+  },
+  "encrypted_fixture": [
+    {
+      "track": "video",
+      "samples": 100,
+      "encrypted_bytes": 242912,
+      "first_timestamp_seconds": 12.0
+    },
+    {
+      "track": "audio",
+      "samples": 187,
+      "encrypted_bytes": 64351,
+      "first_timestamp_seconds": 12.032
+    }
+  ],
+  "negative_control": [
+    {
+      "track": "video",
+      "without_license_decode_exit_code": 183,
+      "raw_logs_saved": false
+    },
+    {
+      "track": "audio",
+      "without_license_decode_exit_code": 183,
+      "raw_logs_saved": false
+    }
+  ],
+  "live_media_exchange_executed": false
+}

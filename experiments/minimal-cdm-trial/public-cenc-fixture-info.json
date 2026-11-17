@@ -1,0 +1,14 @@
+[
+  {
+    "track": "video",
+    "samples": 100,
+    "encrypted_bytes": 242912,
+    "first_timestamp_seconds": 12.0
+  },
+  {
+    "track": "audio",
+    "samples": 187,
+    "encrypted_bytes": 64351,
+    "first_timestamp_seconds": 12.032
+  }
+]

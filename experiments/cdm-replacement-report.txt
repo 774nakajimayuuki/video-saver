@@ -1,0 +1,109 @@
+TunePat同梱CDMの置き換え：Chrome同梱CDMでの検証
+確認日：2026-10-10（日本時間）
+
+結論
+
+ライセンス認証の試作で、TunePat同梱CDMへの依存を外すことができた。
+このMacのChrome同梱CDMを自作ホストから使用し、NHKのライセンス認証に成功した。
+ユーザーが明示承認した1回の要求にHTTP 200が返り、CDMで鍵3件が利用可能になった。
+23:44:24頃、CDMセッションを閉じて正常終了（終了コード0）。
+
+ただし、NHKログイン状態は引き続きTunePatの既存Cookieを参照した。
+TunePat全体への依存がなくなった結果ではない。
+NHK動画の復号・MP4保存も、今回の試験には含めていない。
+
+1. 置き換えたもの
+
+以前
+  TunePat内の native/sig_files/libwidevinecdm.dylib
+  20,183,520 bytes
+  SHA-256: c22f00b43796d3d2ffed7643291b68c8f51679111ff709ce3b4476b6997f4a06
+
+今回
+  /Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/
+  Versions/154.0.8037.98/Libraries/WidevineCdm/_platform_specific/mac_arm64/libwidevinecdm.dylib
+  CDMバージョン4.10.3112.0、Appleシリコン用
+  20,416,896 bytes
+  SHA-256: e1e9f6b0c77f4251542a2f49dda419c85eda88c5d9ef2721d5d594dc195a6e5f
+
+Chromeのファイルはコピー・改変せず、既存の場所から読み込んだ。
+この試験でTunePatのCDMや独自の中継ライブラリは使用していない。
+静的な依存ライブラリ一覧も確認し、TunePatのライブラリ参照はなかった。
+二つのCDMは版が異なるため、ハッシュの違いだけでTunePatによる改変を断定しない。
+
+2. 確認した段階
+
+外部通信なし
+・公開CDMインターフェース10で、読み込み・インスタンス生成・初期化・終了に成功。
+・NHK対象番組の公開初期化情報から、1,717 bytesのライセンス要求を生成。
+・このオフライン試験では送信を行わず、終了コード44となる。サーバー拒否ではない。
+
+明示承認後の1回の通信
+・送信先：https://licence.hsk.st.nhk/widevine/license
+・視聴用トークンをAuthorizationヘッダーに付けてPOST。
+・要求1,717 bytes、応答HTTP 200・1,063 bytes。
+・CDMの応答処理が成功し、usable_key_count=3。
+・ライセンス通信1回、更新トークン通信0回、再送・リダイレクト0回。
+・動画セグメントの取得・復号・MP4保存0回。
+
+単にHTTP 200が返っただけでなく、同じCDMセッション内で鍵が利用可能に
+なったことを確認している。ただし、その鍵でNHKの映像・音声サンプルを実際に
+復号したことまでは、この試験では確認していない。
+
+3. 試作コードの変更
+
+nhk-auth-trial/run_nhk_license.py の既定CDMをChromeに変更した。
+--cdm-source chrome が現在の既定動作で、外部送信は引数なしでは行わない。
+旧試験は --cdm-source tunepat-legacy で区別し、過去の成功記録を保持した。
+両試験の送信試行記録は別だが、各試験ともすでに1回を実行済み。
+どちらも送信試行記録があれば再送を止める。
+
+Chromeが見つからない・更新されてハッシュが変わった場合、処理を停止する。
+TunePatへ自動的に戻す動作はない。
+これはこのMac用の検証プログラムであり、Chromeの更新追従を実装した完成版ではない。
+Video Saver本体の保存機能や画面は今回変更していない。
+
+4. 残る依存と、アプリ化するための作業
+
+・CDMはChrome同梱のGoogle Widevineに依存する。自作CDMには置き換えていない。
+・NHKのログイン状態はTunePatから参照している。アプリ専用ブラウザーでの
+  ログイン・視聴用トークン更新に移す作業が残る。
+・NHKの短い区間について、ライセンス取得と同じCDMセッション内で、
+  映像・音声の復号からMP4保存まで確認する必要がある。
+
+通常のブラウザー内再生にはEMEという公開APIがあるが、それ自体が復号済みMP4を
+返すAPIではない。今回の結果は自作ネイティブホストからCDMを使った結果であり、
+ChromeのWebページだけでMP4を取り出せたという意味ではない。
+
+5. CDMの入手・配布について、今回確認できた範囲
+
+Chrome同梱CDMはオープンソースではない。ローカルのLICENSEとGoogleの公開案内には、
+Googleとの別途ライセンス契約に関する記載がある。
+Googleのパートナー用リポジトリーへのアクセス手順では、企業メールアドレスに
+ひもづくGoogleアカウント、Widevine Master License Agreement、個別のアクセス承認を案内している。
+
+今回のローカル試験の成功は、CDMの再配布許可や、特定用途についての契約上の
+許可を確認した結果ではない。一般配布用アプリへの組み込み条件は未確認。
+また、Widevineの利用契約だけでNHK番組の利用範囲が決まるわけではない。
+契約手続きの実施や、Google・NHKへの問い合わせ送信は行っていない。
+
+公開資料
+https://developers.google.com/widevine/drm/overview
+https://developers.google.com/widevine/access
+https://chromium.googlesource.com/chromium/src/third_party/+/master/widevine/LICENSE
+https://www.w3.org/TR/encrypted-media/
+
+6. 保存した根拠
+
+minimal-cdm-trial/chrome-cdm-bootstrap-result.json
+  外部通信なしでのCDM初期化結果。
+nhk-auth-trial/offline-chrome-license-result.json
+  外部通信なしでのNHK要求生成結果。
+nhk-auth-trial/chrome-license-attempt.json
+  今回の1回の送信試行記録。
+nhk-auth-trial/chrome-license-result.json
+  HTTP応答とCDMの状態値。認証情報・要求本文・応答本文・鍵の内容は含めない。
+nhk-auth-trial/chrome-cdm-verification.json
+  インストール済みCDMのハッシュ、初期化と認証結果の照合。
+
+通常のアプリ保存・配布の完成と、今回実証したCDM差し替えを区別する。

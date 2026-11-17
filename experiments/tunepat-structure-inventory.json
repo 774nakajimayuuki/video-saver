@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-10-10T20:19:02.408674+09:00",
+  "app_version": "3.1.0",
+  "electron_framework_version": "35.1.5",
+  "method": "Read-only metadata, static strings and dependencies; source JavaScript and bytecode were not executed by the analysis. One existing-process image-path snapshot was inspected.",
+  "files": [
+    {
+      "path": "/Applications/TunePat VideoGo All-In-One.app/Contents/Resources/app/package.json",
+      "bytes": 951,
+      "sha256": "201dbd67a8b88d6bc29d8c2959f3bfca4718850446cdf890c42e55ec93c49864"
+    },
+    {
+      "path": "/Applications/TunePat VideoGo All-In-One.app/Contents/Resources/app/app.json",
+      "bytes": 903,
+      "sha256": "62bb633e3a8906fcdf4f5757279eeeeec779b0b4490c289ce4bb6bdfd74cdd02"
+    },
+    {
+      "path": "/Applications/TunePat VideoGo All-In-One.app/Contents/Resources/app/main.js",
+      "bytes": 1082167,
+      "sha256": "208d8e51c1e7691135128403bd18ed046b93929bff232ed102f6dd99e9bd9e8e"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/main/main_arm64.jsc",
+      "bytes": 6441496,
+      "sha256": "f57143116c7f61e0f0de14c8ebf7ee51f75b429c909c13ce777a198c2fb2ae57"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/main/config/moduleCatalog.json",
+      "bytes": 2354,
+      "sha256": "6519159cdae6e6eb9283e3d19f92ec33647fc708ea3f26981ebd6960f914a000"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/main/preload/nhk/i.js",
+      "bytes": 1014680,
+      "sha256": "f3029fe4d66e22d65026c11faeaee0a3850e495d9c12eb52f252a6e012d42fbd"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/main/preload/nhk/p.js",
+      "bytes": 200533,
+      "sha256": "22a55254221f338258ec4d00664c2840737d80f95377388f21c52f3b859e299f"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/renderer/js/app.js",
+      "bytes": 15017,
+      "sha256": "90c7ab50a2ac7b273896f46ab9a07a286c14e1a21e254014ec1ad414edf0c473"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/renderer/js/renderer_arm64.jsc",
+      "bytes": 3307376,
+      "sha256": "196f9e57f2f304bf70a423026a4526b147bbdf6e6aa491117e6563213981bf37"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/libdecrypt.dylib",
+      "bytes": 11229728,
+      "sha256": "235ce5f808857baf41b6fa921b45e721f99ed1b915f85fbbdb0b924824a441da"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/wv_shell",
+      "bytes": 11450000,
+      "sha256": "4b774f96ce0748d225b2f518aeccd02f7b832edc6f923d0e25bba21536b7bff1"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/media_handle",
+      "bytes": 10992208,
+      "sha256": "6882300fa8be0150c4b6eda2997e1159465176ff23edb0c3bbf41d25529625d5"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/libMediaConvert.dylib",
+      "bytes": 12527456,
+      "sha256": "62f822de55dd02dc785216cc5d91c7826966be3ab21e3f46ce599f246c6f2f6d"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/libTranscodeDLL.dylib",
+      "bytes": 11916496,
+      "sha256": "e1cfc9c4bd57b9ebaea397002f0b879536f03575b275d7123ecc8b09816858ca"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/libTranscodeRecord.dylib",
+      "bytes": 10733664,
+      "sha256": "dbe7af5469908cee9efb31fb3c685c980e5291e663cc816ee2cacc013be7f3c1"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/librecord_lib.dylib",
+      "bytes": 4771600,
+      "sha256": "948121be62bf93c5c375e75911763289146d905afa9b9a35a303bf898f6714e2"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/WidevineCdm/4.10.2934.0/_platform_specific/mac_arm64/libwidevinecdm.dylib",
+      "bytes": 70512,
+      "sha256": "fe04055d03a42b6c975899c489a121eeda2ab957775439f8f5e61aecb03e0768"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/native/sig_files/libwidevinecdm.dylib",
+      "bytes": 20183520,
+      "sha256": "c22f00b43796d3d2ffed7643291b68c8f51679111ff709ce3b4476b6997f4a06"
+    },
+    {
+      "path": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/WidevineCdm/4.10.2934.0/_platform_specific/mac_arm64/libwidevinecdm.dylib",
+      "bytes": 70512,
+      "sha256": "fe04055d03a42b6c975899c489a121eeda2ab957775439f8f5e61aecb03e0768"
+    }
+  ]
+}

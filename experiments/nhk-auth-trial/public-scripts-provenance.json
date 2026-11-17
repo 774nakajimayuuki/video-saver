@@ -1,0 +1,262 @@
+{
+  "scope": "Unauthenticated public NHK static JavaScript; no account data sent",
+  "page": "https://www.web.nhk/tv/an/hokkaidodo/pl/series-tep-2J211716Z5/ep/Q4YVTYHXB2",
+  "files": [
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/29b8o_n5ld3ah.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "29b8o_n5ld3ah.js",
+      "bytes": 31615,
+      "sha256": "94d9762ca6c7fe4874f480f0d24f062440e40a2ca5e27ca4ad62b6926fda67b3",
+      "identifiers": {
+        "credentials": 2
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/116b898_6a5a2.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "116b898_6a5a2.js",
+      "bytes": 234614,
+      "sha256": "e7b0a20b893eadddb1976796a0a2d077e3696c063a5db7a0d7036cda6b6d09cd",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/1yhz16u12fyx8.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "1yhz16u12fyx8.js",
+      "bytes": 155836,
+      "sha256": "7f95780ab35a8707183281f2038451a18df38aef37ffb1a1aa363a69ba5a03b6",
+      "identifiers": {
+        "credentials": 1
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/turbopack-37wkgoqig0vrd.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "turbopack-37wkgoqig0vrd.js",
+      "bytes": 9824,
+      "sha256": "38ad0804fb8baf1ce5c239b72bcdb0c5c5b0c3256f69cd66445d79cd03b7202e",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/04gac4ch-s9qt.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "04gac4ch-s9qt.js",
+      "bytes": 14517,
+      "sha256": "ff7bfe999bc031d38699335eb2227f966de84cf7d231f44ef625739a301e60f2",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/2v0-k9r7phiog.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "2v0-k9r7phiog.js",
+      "bytes": 28870,
+      "sha256": "74c9887f362c74b869305a5fda4e2f5531a3a23e9d450012a98abb478db6d589",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0hgb8zjqwf_2q.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0hgb8zjqwf_2q.js",
+      "bytes": 26296,
+      "sha256": "4f7c200946d8233d3979e193194528c6830e08305dfc70269e26ab52b70ce0c7",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0gauu6ly0auja.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0gauu6ly0auja.js",
+      "bytes": 33128,
+      "sha256": "ee6f4d08e25872765443f9968683145323a8207f624733c2bafef983274dc4f5",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/2yzv3rwyfdeb7.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "2yzv3rwyfdeb7.js",
+      "bytes": 30504,
+      "sha256": "e9e6096546b9857034e7326e019bb01a3e549c335b9a165fe8c9dc8f9762df16",
+      "identifiers": {
+        "accessToken": 4
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0_qcdcl_v_27i.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0_qcdcl_v_27i.js",
+      "bytes": 35446,
+      "sha256": "d15a6564bc91388e22982507bc5c7222366ac88dfc1640bd92d73dc9146f5cac",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0q0fa5_hx6i-u.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0q0fa5_hx6i-u.js",
+      "bytes": 41940,
+      "sha256": "5e650650bbce3cd61f09b3f0a61beab0cb10a78f7254b7ad52784a9dff0d1836",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/23msglm0csupk.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "23msglm0csupk.js",
+      "bytes": 267682,
+      "sha256": "62a82e0f89fb6324e2feb8aa01da0e94c5f621e52d883984472f377e446abc25",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0f_-5-6j4lmzf.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0f_-5-6j4lmzf.js",
+      "bytes": 309642,
+      "sha256": "a5313c86699157713ce8fc59997fec1b34a8a1edee106c912cae7d4e68f7ec40",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/332xtyg-dg8i7.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "332xtyg-dg8i7.js",
+      "bytes": 91962,
+      "sha256": "7b2f8ef2e14271e3445de827e9a65f2cfdf1d096a4d3440be33731fe92b669ce",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0rrx7rn5nsaqb.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0rrx7rn5nsaqb.js",
+      "bytes": 20362,
+      "sha256": "c67ebca84e255f715cf1b3736f7df367d917cdc50fe910cdfc8be3ca5261c145",
+      "identifiers": {
+        "credentials": 5
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/04-atl6h9qw66.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "04-atl6h9qw66.js",
+      "bytes": 55639,
+      "sha256": "2db41cccc62ddbd393488edc5e7db6f51aa9c29f39af25e8037339067cf0953c",
+      "identifiers": {
+        "Authorization": 3,
+        "Bearer": 1,
+        "accessToken": 23,
+        "credentials": 7
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/363903xialvrw.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "363903xialvrw.js",
+      "bytes": 73083,
+      "sha256": "4d9dfac04445a5738f57f434bec92c8414e48cbe65c19c8484184466b85894f5",
+      "identifiers": {
+        "accessToken": 4,
+        "credentials": 1
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/3d7b194d4nd-u.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "3d7b194d4nd-u.js",
+      "bytes": 69714,
+      "sha256": "2cc4040459aeced199076350135372ec230b9cb045c862952c37fcd8138ea669",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/1rdv1iu_n7hs-.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "1rdv1iu_n7hs-.js",
+      "bytes": 3671,
+      "sha256": "45f118ad8ccf55735fb90e0cb32759397de033510530de2255b67dfa8c0a1281",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0ma5wcb2_ad12.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0ma5wcb2_ad12.js",
+      "bytes": 19453,
+      "sha256": "a1dbf7993c2273295571f59f6ee95702a0dd49986aa15b57f60dc24bb4d50ba7",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/1a0_75ftee6_a.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "1a0_75ftee6_a.js",
+      "bytes": 403,
+      "sha256": "1a6f7b65d5a11e553d36baafe86d7692b226cb16ea65e61896923bad551bb792",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/31p07jrq0v1x1.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "31p07jrq0v1x1.js",
+      "bytes": 22516,
+      "sha256": "ff7efaaa18a38a66a143393def62092863755e0171eb95bbe13fe2879a2f5751",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/3csylf9e30kq5.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "3csylf9e30kq5.js",
+      "bytes": 64225,
+      "sha256": "d1dcb09b0412b869df61b4eec62d3a00507ac148c219f10fd40bb03904fc9840",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/41xs654-03lni.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "41xs654-03lni.js",
+      "bytes": 66881,
+      "sha256": "72e339b8867277fecc92445005a4d05a5c3ee0b0329d66eafa7de9dda19a0417",
+      "identifiers": {
+        "widevine": 9,
+        "licence": 3,
+        "accessToken": 2
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/2zra4kplpqys4.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "2zra4kplpqys4.js",
+      "bytes": 35981,
+      "sha256": "887418d83ed7353c288bdcca6959161ee9fcb5f33f3e22a340c6700480046018",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/43cenh59gtr0g.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "43cenh59gtr0g.js",
+      "bytes": 14019,
+      "sha256": "e9b5e7cd2971770e7b3d366f5490970beba9d74e9947a1bc77f4322b23b1caa7",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/2-twbjukj860r.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "2-twbjukj860r.js",
+      "bytes": 23592,
+      "sha256": "f8a63a589475d8d025d6870f5f473f25e3d50d0367ecb036f2e254bdc84b2071",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0iionhl9fp9qe.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0iionhl9fp9qe.js",
+      "bytes": 40081,
+      "sha256": "48ec5c3730cca91062fa4aa09edcad7b6c4296df892ecedb171e01d10101dea4",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0f2ksv2dajmng.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0f2ksv2dajmng.js",
+      "bytes": 489032,
+      "sha256": "23e2d5483d23e898c9b7cf6074cac65e7bbfb087571f74991d4814dad0c285dd",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/27wpft9_l-jt3.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "27wpft9_l-jt3.js",
+      "bytes": 40202,
+      "sha256": "b48677d929bdebd1839f7bf5a6a7c3d22575511a6e1289cac2d54ef4382ab450",
+      "identifiers": {
+        "widevine": 11
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/2-yymxxlq_dn-.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "2-yymxxlq_dn-.js",
+      "bytes": 19869,
+      "sha256": "0b177a04158162eb893f28b01f19a8b25340ac9053ac67a8c5267e6746b68d4b",
+      "identifiers": {}
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/0cz1d0mv5g_q7.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "0cz1d0mv5g_q7.js",
+      "bytes": 112677,
+      "sha256": "cad59447f29963bd59e14cf4cf0851361b1f722b7c0cfc09a596e9894f2bce84",
+      "identifiers": {
+        "withCredentials": 2,
+        "credentials": 7
+      }
+    },
+    {
+      "url": "https://www.web.nhk/_next/static/chunks/3d0dsxdbr25ur.js?dpl=334d8423faac1e153e07ca21c03ca729e4538d57",
+      "file": "3d0dsxdbr25ur.js",
+      "bytes": 8182,
+      "sha256": "52a6d306acf7541f99bff4bbee7e54fbd5eda5665454fa953818195845590ab4",
+      "identifiers": {}
+    }
+  ]
+}

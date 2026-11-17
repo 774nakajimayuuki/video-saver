@@ -1,0 +1,22 @@
+{
+  "cdm_path": "/Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Versions/154.0.8037.98/Libraries/WidevineCdm/_platform_specific/mac_arm64/libwidevinecdm.dylib",
+  "cdm_sha256": "e1e9f6b0c77f4251542a2f49dda419c85eda88c5d9ef2721d5d594dc195a6e5f",
+  "cdm_version": "4.10.3112.0",
+  "interface_version": 10,
+  "initialization_verified": true,
+  "offline_request_generation_verified": true,
+  "nhk_license_http_status": 200,
+  "usable_key_count": 3,
+  "http_attempts_in_chrome_trial": 1,
+  "historical_tunepat_result_preserved": true,
+  "verification_network_requests": 0,
+  "remaining_dependencies": [
+    "Existing TunePat NHK login",
+    "Installed Google Chrome Widevine CDM"
+  ],
+  "not_verified": [
+    "NHK sample decryption and MP4 output",
+    "App-owned login and renewal",
+    "Distribution arrangements"
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "inspection_date_jst": "2026-10-10",
+  "product": "TunePat VideoGo All-In-One 3.1.0 ARM",
+  "episode_id": "Q4YVTYHXB2",
+  "scope": "Existing logs and static code metadata only. No additional download or application modification.",
+  "privacy": "Only predetermined facts exported. No raw log messages, clipboard text, credentials, license/session payloads, or device identifiers.",
+  "sources": {
+    "TunePat VideoGo All-In-One.log": {
+      "sha256": "8efaf1773e113b3026faa25e2dad528ca19ac6a1d876627e0adb854c29ed63c6",
+      "bytes": 135618
+    },
+    "com.tunepat.vidicable.video.log": {
+      "sha256": "ba2b20e4aa3cc8fda8b21bd350379da764f42c1419be61de643e6a08984a10fd",
+      "bytes": 30530
+    },
+    "media_handle.log": {
+      "sha256": "08cb750acac6cce2c76621ef002d3945618a8cd38dbe757d8ab3dd92ba6472b5",
+      "bytes": 20853
+    },
+    "transcode.log": {
+      "sha256": "f6702a6d3bac6ce44bfc94d9aa9c4ec8ec4180dbccfb1cc8bd7c94496644fd44",
+      "bytes": 51746
+    },
+    "native2.log": {
+      "sha256": "e21cb3348055524a95f277a3d8cbd55c10509e6491f7db335724c0eeac92509a",
+      "bytes": 55670
+    }
+  },
+  "events": [
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 34,
+      "time_jst": "20:00:07:195",
+      "fact": "MC library loaded successfully"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 35,
+      "time_jst": "20:00:07:225",
+      "fact": "Controller obtains native interface references"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1429,
+      "time_jst": "20:05:30:962",
+      "fact": "Controller starts download preparation"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1509,
+      "time_jst": "20:05:33:483",
+      "fact": "NHK download controller prepares playback"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1599,
+      "time_jst": "20:06:10:824",
+      "fact": "Controller completes download preparation"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 23,
+      "time_jst": "20:00:07.225",
+      "fact": "Native UI callback is registered"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 37,
+      "time_jst": "20:00:07.226",
+      "fact": "Bridge launches media_handle"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 40,
+      "time_jst": "20:00:07.482",
+      "fact": "media_handle PID 21990 connects to IPC"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 168,
+      "time_jst": "20:06:07.478",
+      "fact": "Native bridge handles PrepareDownload"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 198,
+      "time_jst": "20:06:10.398",
+      "fact": "Native bridge executes Convert"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 199,
+      "time_jst": "20:06:10.400",
+      "fact": "Convert job is associated with the requested episode"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 203,
+      "time_jst": "20:06:10.696",
+      "fact": "Transcode PID 22700 connects to IPC"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 206,
+      "time_jst": "20:06:10.751",
+      "fact": "Transcode initialization is acknowledged"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 227,
+      "time_jst": "20:07:05.243",
+      "fact": "Native bridge finishes Convert"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 20,
+      "time_jst": "20:06:10.413",
+      "fact": "Selected internal conversion mode is C"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 21,
+      "time_jst": "20:06:10.413",
+      "fact": "media_handle selects the bundled ffmpeg executable"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 30,
+      "time_jst": "20:06:10.459",
+      "fact": "Re-encoding and hardware acceleration are enabled"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 31,
+      "time_jst": "20:06:10.459",
+      "fact": "Custom media input and media_decoder feed H.264 VideoToolbox; quality argument 70, duration limit 300 seconds"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 35,
+      "time_jst": "20:06:26.829",
+      "fact": "FFmpeg opens the proprietary media input"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 37,
+      "time_jst": "20:06:26.829",
+      "fact": "FFmpeg receives raw video described as yuv420p, 1920x1080"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 59,
+      "time_jst": "20:06:26.831",
+      "fact": "Video mapping explicitly decodes custom raw input and re-encodes H.264"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 60,
+      "time_jst": "20:06:26.831",
+      "fact": "Audio is copied in this conversion stage"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 61,
+      "time_jst": "20:06:26.831",
+      "fact": "Subtitle mapping targets mov_text"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 68,
+      "time_jst": "20:06:27.072",
+      "fact": "Output encoder matches the measured saved file"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 74,
+      "time_jst": "20:07:02.650",
+      "fact": "Episode transcode finishes with reported status 0"
+    },
+    {
+      "file": "media_handle.log",
+      "line": 150,
+      "time_jst": "20:07:02.692",
+      "fact": "Subsequent packaging step copies the already encoded video"
+    },
+    {
+      "file": "transcode.log",
+      "line": 1,
+      "time_jst": "20:06:10.694",
+      "fact": "Transcode process starts"
+    },
+    {
+      "file": "transcode.log",
+      "line": 9,
+      "time_jst": "20:06:10.751",
+      "fact": "Transcode process initializes IPC"
+    },
+    {
+      "file": "transcode.log",
+      "line": 12,
+      "time_jst": "20:06:10.810",
+      "fact": "Transcode process receives mode C"
+    },
+    {
+      "file": "transcode.log",
+      "line": 14,
+      "time_jst": "20:06:10.811",
+      "fact": "Transcode enters the decrypter setup path"
+    },
+    {
+      "file": "transcode.log",
+      "line": 16,
+      "time_jst": "20:06:10.811",
+      "fact": "Transcode initializes a mapped-data transport component"
+    },
+    {
+      "file": "transcode.log",
+      "line": 26,
+      "time_jst": "20:06:10.812",
+      "fact": "Transcode begins downloading"
+    },
+    {
+      "file": "transcode.log",
+      "line": 37,
+      "time_jst": "20:06:10.812",
+      "fact": "Segment download requests begin"
+    },
+    {
+      "file": "transcode.log",
+      "line": 41,
+      "time_jst": "20:06:10.868",
+      "fact": "Custom input begins reading stream headers"
+    },
+    {
+      "file": "transcode.log",
+      "line": 105,
+      "time_jst": "20:06:26.827",
+      "fact": "Custom input finishes reading stream headers"
+    },
+    {
+      "file": "native2.log",
+      "line": 1,
+      "time_jst": "20:06:06.939",
+      "fact": "wv_shell process is present during this job"
+    },
+    {
+      "file": "native2.log",
+      "line": 83,
+      "time_jst": "20:06:09.044",
+      "fact": "wv_shell signals readiness"
+    },
+    {
+      "file": "native2.log",
+      "line": 101,
+      "time_jst": "20:06:59.869",
+      "fact": "wv_shell logs completion of encrypted input"
+    },
+    {
+      "file": "native2.log",
+      "line": 102,
+      "time_jst": "20:06:59.869",
+      "fact": "wv_shell logs completion of plain output"
+    }
+  ],
+  "static_evidence": {
+    "file": "main/main_arm64.jsc",
+    "sha256": "f57143116c7f61e0f0de14c8ebf7ee51f75b429c909c13ce777a198c2fb2ae57",
+    "strings": [
+      {
+        "term": "koffi",
+        "first_byte_offset": 870806
+      },
+      {
+        "term": "nativeLib",
+        "first_byte_offset": 3315266
+      },
+      {
+        "term": "apiPointers",
+        "first_byte_offset": 3315290
+      },
+      {
+        "term": "nativeCallback",
+        "first_byte_offset": 3315314
+      },
+      {
+        "term": "ffiMap",
+        "first_byte_offset": 3315345
+      },
+      {
+        "term": "ffiId",
+        "first_byte_offset": 3315365
+      },
+      {
+        "term": "getAllInterfaces",
+        "first_byte_offset": 3315618
+      },
+      {
+        "term": "initializeCallback",
+        "first_byte_offset": 3318108
+      },
+      {
+        "term": "uiOperationCallback",
+        "first_byte_offset": 3318177
+      },
+      {
+        "term": "executeCallback",
+        "first_byte_offset": 3318227
+      },
+      {
+        "term": "QueryInterface",
+        "first_byte_offset": 3318339
+      },
+      {
+        "term": "AbortExecute",
+        "first_byte_offset": 3318405
+      },
+      {
+        "term": "SetUIOperationCallback",
+        "first_byte_offset": 3318467
+      },
+      {
+        "term": "SetUIOperationResult",
+        "first_byte_offset": 3318504
+      },
+      {
+        "term": "libMediaConvert.dylib",
+        "first_byte_offset": 3318851
+      },
+      {
+        "term": "executeTool",
+        "first_byte_offset": 3325704
+      }
+    ],
+    "library": "native/libMediaConvert.dylib",
+    "exports": [
+      "_AbortExecute",
+      "_DeInitialize",
+      "_Execute",
+      "_Initialize",
+      "_QueryInterface",
+      "_SetUIOperationCallback",
+      "_SetUIOperationResult"
+    ],
+    "limitation": "Strings and exports do not recover the complete call graph or argument ABI."
+  },
+  "custom_input_boundary": {
+    "library": "native/libTranscodeDLL.dylib",
+    "sha256": "e1cfc9c4bd57b9ebaea397002f0b879536f03575b275d7123ecc8b09816858ca",
+    "exports": [
+      "_Deinitialize",
+      "_Initialize",
+      "_ReadHeader",
+      "_ReadPacket"
+    ],
+    "references": [
+      {
+        "file": "native/libavformat.59.dylib",
+        "sha256": "f325724468977c07a7ce58d723cc6e436de348a6ed1541ac1c39e0356ac7c4d7",
+        "strings": [
+          {
+            "term": "libTranscodeDLL.dylib",
+            "present": true
+          },
+          {
+            "term": "libTranscodeRecord.dylib",
+            "present": true
+          },
+          {
+            "term": "Initialize",
+            "present": true
+          },
+          {
+            "term": "Deinitialize",
+            "present": true
+          },
+          {
+            "term": "ReadHeader",
+            "present": true
+          },
+          {
+            "term": "ReadPacket",
+            "present": true
+          }
+        ]
+      },
+      {
+        "file": "native/libavcodec.59.dylib",
+        "sha256": "c064c1c8640239f83d5b0736ef20292ac416b933a43f06dd74f5802da432a687",
+        "strings": [
+          {
+            "term": "media_decoder",
+            "present": true
+          }
+        ]
+      }
+    ],
+    "confidence": "Strong static evidence, consistent with ReadHeader log events; individual dynamic symbol calls were not traced."
+  },
+  "unmatched_checks": []
+}

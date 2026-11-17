@@ -1,0 +1,114 @@
+TunePat・Chromeのインストール依存を外すための試作
+更新：2026-10-11（日本時間）
+
+今回の到達点
+
+Video Saver 0.3.1で、アプリ専用のNHK ONEログインと、同梱CDMによる視聴認証を接続した。
+macOS標準のWebKitを使い、TunePat・Chromeの起動やCookieの読み取りを必要としない。
+NHK公式トップページから既存アカウントのログイン画面への遷移を実機で確認した。
+ユーザーがログイン完了を報告し、アプリの表示でもアカウント用の情報を確認した。
+アプリを再起動しても、そのアプリ自身のログイン状態が保持されていることを確認した。
+
+Google CDMは、このMacで検証済みのファイルを未改変でローカルの試作用部品に複製した。
+その部品をVideo Saver.appのResourcesに収め、アプリ内のパスを指定して
+自作CDMホストから読み込み・インスタンス生成・初期化・終了できた。
+Chromeのインストール先を引数にせずに、CDM初期化が成功した。
+ただし、ChromeをアンインストールしたMacや別のMacでの試験は未実施。
+
+これは「GoogleのCDMを自作した」「NHKの保存アプリが完成した」という結果ではない。
+2026-10-11 00:14頃、新たに明示承認された1回のNHKライセンス要求を実行した。
+HTTP 200、要求1,717 bytes、応答1,063 bytes、CDMで利用可能な鍵3件、終了コード0。
+NHK動画の取得・復号・MP4出力は実施していない。
+
+1. ログイン画面
+
+・WKWebViewと、アプリ専用UUIDの永続WKWebsiteDataStoreを使用。
+・Safari / Chrome / TunePatのブラウザープロファイルは参照しない。
+・ユーザーはNHKのWebページに直接ログイン情報を入力する。
+・標準のCookie保存を使う。値を実験ログやJSONへエクスポートしない。
+・表示する状態は、NHK用Cookie、アカウント用の認証種別、期限のローカル確認。
+  JWTの署名検証やサーバーへの認証テストを行った表示ではない。
+・期限切れ、未ログイン、アカウントなしのトークンを区別する。
+・ログイン画面では動画リソースとNHKライセンス窓口への通信をブロック。
+・このアプリのログイン情報だけを消去するボタンを追加。
+・WebKitの標準の通信・証明書検証・ユーザーエージェントを使用。
+
+NHKログインページにはCloudflareの本人確認がある。
+初回の表示確認中に本人確認が進まない状態を観測し、アプリ側の画面遷移制限で
+about:srcdoc等のローカルな子フレームまで遮断していた点を修正した。
+修正版でユーザーがログインを完了した。アプリ再起動後もログイン情報を確認できた。
+本人確認を自動解答したり、サイト側のチェックを回避する処理は入れていない。
+
+2. CDMの分離
+
+元の部品：このMacのChromeに同梱されたGoogle Widevine 4.10.3112.0（ARM64）。
+部品の版とSHA-256は、前回のNHK認証成功時のものと一致する。
+SHA-256: e1e9f6b0c77f4251542a2f49dda419c85eda88c5d9ef2721d5d594dc195a6e5f
+サイズ：20,416,896 bytes
+
+ビルド用の保管場所：video-saver/local-components/WidevineCdm/
+アプリ内の場所：Contents/Resources/WidevineCdm/_platform_specific/mac_arm64/libwidevinecdm.dylib
+LICENSEとmanifest.jsonも保持した。CDMはコピーであり、外部へのシンボリックリンクではない。
+出所とファイル別のハッシュはlocal-components/provenance.jsonに保存した。
+
+公開インターフェース10の初期化試験：成功、終了コード0。
+CDMの直接リンク先はmacOSのライブラリ・フレームワークで、TunePatやChromeへの
+直接のリンクは見つからなかった。CDM内部の全ファイルアクセスを追跡した試験ではない。
+Video Saver本体から自作ホストを起動する認証確認を実装し、成功した。
+動画セグメントの取得・復号・MP4出力との接続は未実装。
+過去の実験スクリプトは再現用に残しているため、そこには旧アプリのパスが残る。
+
+3. 配布に関して残る事項
+
+今回行ったのは、このMac上でのローカル試作用コピー、初期化、NHKの認証確認。
+CDMを一般配布できる許諾があることを確認したものではない。
+Googleの案内ではWidevineの利用に契約が必要とされ、パートナー用の部品・資料は
+企業アカウント、Widevine Master License Agreement、個別のアクセス承認を案内している。
+正式に提供される部品と、その用途・更新・配布条件は別途確認が必要。
+契約手続きや、Google・NHKへの問い合わせは行っていない。
+Googleとの契約だけで、NHK番組の保存可否まで決まるわけではない。
+
+4. 検証
+
+・macOS 14以降を対象にARM64版アプリをビルド。
+・ログイン状態判定・認証情報の選択の17テスト群：成功。
+  期限切れ、別ドメイン、非Secure、重複、アカウントなしのトークン等を確認。
+・NHK公式トップページ、公式ログインページの表示：成功。
+・アプリ内CDMの初期化と認証要求生成：成功（外部送信なし）。
+・アプリ自身のログイン情報を匿名パイプで子プロセスへ渡す処理：成功。
+・接続先固定、再送防止、リダイレクト拒否、応答上限等の模擬通信テスト6件：成功。
+・ユーザー承認後のNHKライセンス認証：1回、HTTP 200、利用可能な鍵3件。
+・アプリの厳密なローカル署名検証：成功。
+・最終版の再起動後も成功結果を表示し、送信ボタンを非表示にすることを確認。
+・再起動後の結果・試行記録が、成功時の記録と一致することを確認。
+・従来の外部Nodeリンクをアプリ内のコピーに変更。起動確認：v24.3.0。
+・ffmpeg / ffprobeは、このMacの導入済みコマンドを使う構成が残る。
+
+5. 次の確認
+
+・必要な通信の範囲を定めたうえで、同じセッションでNHKの短い区間を保存できるか。
+・正式なCDM提供・配布条件、配布用署名・公証、残る変換ツールの同梱。
+
+前回許可されたNHKへの各1回の送信は実行済みで、今回のために再利用していない。
+今回も新しく明示承認された1回だけを送った。実行済み記録を送信前に排他的に作り、
+失敗時や再起動後にも再送を止める。再送拒否の結果で元の成功記録を上書きしない。
+Cookie・トークン・要求本文・応答本文・鍵の値は報告ファイルに保存していない。
+成功後はCDMセッションを閉じている。現在も復号可能なセッションを保持しているわけではない。
+
+証跡
+standalone-app-verification.json
+own-session-preparation-result.json
+own-session-license-attempt.json
+own-session-license-result.json
+own-session-authenticated-screen.png
+minimal-cdm-trial/standalone-cdm-bootstrap-result.json
+standalone-login-screen.png
+../NHKLoginStateTests.swift
+../local-components/provenance.json
+
+一次資料
+https://developers.google.com/widevine/drm/overview
+https://developers.google.com/widevine/access
+https://chromium.googlesource.com/chromium/src/third_party/+/master/widevine/LICENSE
+https://developer.apple.com/documentation/webkit/wkwebsitedatastore/init(foridentifier:)
+https://developers.cloudflare.com/turnstile/get-started/mobile-implementation/

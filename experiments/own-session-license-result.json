@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-10T15:14:04.728Z",
+  "mode": "send-once",
+  "phase": "authenticated",
+  "own_login_input_available": true,
+  "cdm_sha256": "e1e9f6b0c77f4251542a2f49dda419c85eda88c5d9ef2721d5d594dc195a6e5f",
+  "challenge_bytes": 1717,
+  "response_bytes": 1063,
+  "http_status": 200,
+  "request_attempts": 1,
+  "usable_key_count": 3,
+  "initialized": true,
+  "sensitive_payloads_saved": false,
+  "media_downloaded": false,
+  "error_code": null,
+  "host_exit_code": 0
+}

@@ -1,0 +1,121 @@
+TunePat：復号・デコード側から映像処理側へのデータ輸送
+確認日：2026-10-10（日本時間）
+対象：TunePat VideoGo All-In-One 3.1.0 Appleシリコン版
+
+今回の結論
+
+前回残っていた「誰が画素データを作るのか」を、CDMのインターフェースまで追えた。
+wv_shell内の独自プロキシがContentDecryptionModule_10を扱い、映像については
+DecryptAndDecodeFrameに対応するインターフェースを呼ぶ。
+得られたVideoFrameから寸法、画素面の位置、1行の長さ、時刻を取り出し、
+PlainDataという通信メタデータへ変換する。
+
+画素本体は名前付き共有メモリを介して渡し、受信側は名前と位置を使って参照する。
+受信側のlibTranscodeDLLがこれをMediaDataBufferへ組み立て、前回確認した
+ReadPacket → media_decoder → AVFrameの経路へ戻している。
+
+1. DecryptSampleという入口の役割
+
+libTranscodeDLLのConvert::DecryptSample（0x8c18）は、トラック番号を確認し、
+そのトラックに対応する処理オブジェクトへ入力・出力バッファを渡す小さな関数。
+この入口自体が暗号処理を全部実装しているわけではない。
+
+今回のログと整合するDecrypterCの経路には、次の呼び出しがある。
+  入力のMediaDataBuffer
+    → SetCipherData
+    → SendCipherData / SendDecryptMessage
+    → 別プロセス側の処理
+    → ReadMapping
+    → ProcessOutputData
+    → 出力のMediaDataBuffer
+
+ProcessOutputDataはキューと排他制御を使って出力を受け渡す。
+1回の入力にその場で必ず1フレームが返る単純な関数ではなく、処理待ちや終端を
+扱う構造がある。空入力による処理の終了・残りフレームの回収経路も存在する。
+
+2. 映像フレームを得る処理
+
+wv_shellのMyContentDecryptionModuleProxyは、コンストラクターのシンボルに
+ContentDecryptionModule_10を受け取る型情報が残っている。
+CreateCdmInstanceは得られたCDMインスタンスをこのプロキシで包む。
+InitializeDecryptModuleはWidevineのパスを取得し、ライブラリを開き、
+InitializeCdmModule_4、CreateCdmInstanceなどの入口を取得する。
+
+DecryptSampleの映像側の経路では、CDMオブジェクトの関数表の同じ位置を呼び、
+InputBuffer_2とMyVideoFrameを渡す。
+その位置は、同じプロキシのDecryptAndDecodeFrameメソッドが転送する位置と一致。
+呼び出し後はPushFrameToCacheへフレームと状態値を渡す。
+
+PushFrameToCacheはVideoFrameToPlainDataを呼び、フレーム情報を変換・直列化して
+出力キューに入れる。音声側にはDecryptedBlockToPlainDataという別の経路がある。
+映像のフレーム化と、音声の圧縮済みサンプルの扱いを同じ処理とは見なさない。
+
+この構造は、復号と映像の展開をCDMのインターフェースへ依頼し、返されたフレームを
+アプリ側の映像処理へ運ぶものと判断できる。CDM内部の暗号処理を解明したという
+意味ではなく、その呼び出し境界と前後の処理を確認したという到達点。
+
+3. 通信メタデータの定義を確認
+
+バイナリに埋め込まれたdecrypt_message.protoのスキーマ情報を読み取った。
+実際の通信データではなく、フィールド名と型の定義を確認したもの。
+
+PlainDataが持つ主な項目：
+  type：SampleまたはFrameなどの種別。Frameの値は2。
+  data_size：データ本体のバイト数。
+  name / offset：参照先の共有領域と、その中の位置。
+  width / height：映像の寸法。
+  y / u / v：3つの画素面について、開始位置と1行あたりのバイト数。
+  pts：表示時刻。
+  video_format：画素形式の識別値。
+
+画素本体を直接入れるbytesフィールドはPlainDataにはない。
+画素本体と、その読み方・場所を示す情報が分かれている。
+VideoFrameToPlainDataはVideoFrameの取得用メソッドから、これらの項目を埋める。
+時刻はCDM側の単位から、この処理で使う時間基準へ換算する。
+
+4. 共有メモリの使い方
+
+CDMHost::AllocateはMappingServer::Getを呼び、CDMへ渡すバッファを用意する。
+MappingBase::OpenMappingにはshm_open、ftruncate、mmapの呼び出しがある。
+したがって、Mappingという名前だけからの推測ではなく、名前付き共有メモリを
+実際に使うコード経路を確認できた。
+
+受信側のReadMappingは、通信メタデータを解析し、PlainDataのnameとoffsetを使って
+MappingClient::Getを呼ぶ。画素本体の先頭位置と、各画素面の配置をそろえて
+MediaDataBufferへ渡す。
+
+前回復元した48バイトの付随情報の幅・高さ・3画素面の配置は、この上流の
+PlainDataと対応する。PlainDataのFrame=2も、受信側で映像用に扱う分岐と一致。
+これで「CDMのVideoFrame → 通信情報 → MediaDataBuffer → AVPacket → AVFrame」の
+主要なデータ形式のつながりが確認できた。
+
+5. 確認の強さと残り
+
+コード上で確認したもの：
+・トラックごとの処理への分岐。
+・CDMプロキシの映像用インターフェース呼び出し。
+・VideoFrameからPlainDataへの項目の詰め替え。
+・共有メモリの作成・接続と、受信側のバッファ組み立て。
+
+既存の保存ログとの整合：
+・今回の保存ではwv_shellとFFmpegの変換プロセスが実際に動作していた。
+・映像の出力はrawvideoを経由してH.264へ再圧縮されていた。
+・今回の静的経路は、この動作と整合する。
+各フレームの実行中の受け渡しを新たに計測したわけではない。
+
+引き続き確認する範囲：
+・保存開始時に、制御側がジョブ設定と必要な状態をどこへ渡すか。
+・ダウンロードした配信断片がMediaDataReaderへ入る経路。
+・初期化から終了までをつないだ全体の担当関係。
+
+元の配信ビットストリームや復号後フレームを今回取り出したわけではなく、
+元配信と出力の解像度・画質差は引き続き確定していない。
+
+根拠：tunepat-decode-transport-evidence.json
+方法：静的な機械語、関数表、シンボル、埋め込みスキーマの照合。
+アプリ改変、メモリ読み取り、追加の保存や実際のライセンス内容の解析は行っていない。
+
+CDMインターフェースの一次資料：
+https://chromium.googlesource.com/chromium/cdm/+/refs/heads/main/content_decryption_module.h
+この資料はCDMインターフェースの意味の確認に用いた。TunePat固有の呼び出し関係は
+このMacの対象バイナリで確認している。

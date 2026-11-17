@@ -1,0 +1,488 @@
+{
+  "inspection_date_jst": "2026-10-10",
+  "scope": "Installed TunePat 3.1.0 ARM static code and historical NHK job logs only",
+  "network_requests_made": 0,
+  "application_modified": false,
+  "privacy": "No cookies, tokens, session IDs, license bodies, private keys or raw vendor logs exported",
+  "native_files": {
+    "WidevineCdm/4.10.2934.0/_platform_specific/mac_arm64/libwidevinecdm.dylib": {
+      "sha256": "fe04055d03a42b6c975899c489a121eeda2ab957775439f8f5e61aecb03e0768",
+      "bytes": 70512
+    },
+    "libdecrypt.dylib": {
+      "sha256": "235ce5f808857baf41b6fa921b45e721f99ed1b915f85fbbdb0b924824a441da",
+      "bytes": 11229728
+    },
+    "wv_shell": {
+      "sha256": "4b774f96ce0748d225b2f518aeccd02f7b832edc6f923d0e25bba21536b7bff1",
+      "bytes": 11450000
+    }
+  },
+  "functions": [
+    {
+      "file": "WidevineCdm/4.10.2934.0/_platform_specific/mac_arm64/libwidevinecdm.dylib",
+      "symbol": "_CreateCdmInstance",
+      "start": "0x356c",
+      "end_exclusive": "0x35fc",
+      "verified_references": [
+        "br\tx5"
+      ],
+      "code_sha256": "9b5b7dcb362a81d9d6ef5701e9ab6d23e96a0fe33a7919cf774ba1b7681b9e77"
+    },
+    {
+      "file": "WidevineCdm/4.10.2934.0/_platform_specific/mac_arm64/libwidevinecdm.dylib",
+      "symbol": "__ZL11Constructorv",
+      "start": "0x3694",
+      "end_exclusive": "0x39d0",
+      "verified_references": [
+        "APP_NATIVE_PATH",
+        "_dlopen",
+        "_dlsym",
+        "CreateCdmInstance"
+      ],
+      "code_sha256": "1cd9e04419cab1f87c1d755bb6d3d60492a5e0da74aa968ea1d7505be1347653"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy31CreateSessionAndGenerateRequestEjN3cdm11SessionTypeENS0_12InitDataTypeEPKhj",
+      "start": "0x39520",
+      "end_exclusive": "0x3a3c0",
+      "verified_references": [
+        "ParseCustomInitData",
+        "Sheller6Launch",
+        "GetShellerByPssh"
+      ],
+      "code_sha256": "beaa322240eb7e4f916a1c30edebadd06f2a1e6614fd7b4743f01a14e04fa363"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy19ParseCustomInitDataEPKhjRNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES9_S9_RN7Sheller10ServerModeER11ConvertMode",
+      "start": "0x38184",
+      "end_exclusive": "0x38658",
+      "verified_references": [
+        "k38InitDataC1",
+        "ParseFromArray",
+        "ConvertModeFromString",
+        "ParseCustomInitData Successed"
+      ],
+      "code_sha256": "2fb7d8c77a081cf1960083d579d8887ef38c1fb7158b664483deca7362c4f2d2"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN7CDMHost16OnSessionMessageEPKcjN3cdm11MessageTypeES1_j",
+      "start": "0x33be0",
+      "end_exclusive": "0x33ff4",
+      "verified_references": [
+        "SignedLicenseRequest",
+        "OnSessionMessage(%p): license request returns empty",
+        "blr\tx8"
+      ],
+      "code_sha256": "621e49022916d0e3d13414d438c29adf9f20f8be0fd3c19060e52cdc5ffdf9a3"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy14LicenseRequestERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE",
+      "start": "0x38e70",
+      "end_exclusive": "0x39080",
+      "verified_references": [
+        "LicenseRequestStructC2",
+        "ShellerManager11GetInstance"
+      ],
+      "code_sha256": "afa7276b3e38450300fb3c5effb721b58fd7e5b451ddf5ca5042b6014693e609"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN14ShellerManager14LicenseRequestERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEN7Sheller20LicenseRequestStructE",
+      "start": "0x467f4",
+      "end_exclusive": "0x46a80",
+      "verified_references": [
+        "Sheller14LicenseRequest",
+        "sheller not ready"
+      ],
+      "code_sha256": "b34a6bca450ae686822051d0852ddd18a64354a6b58b5a845ce9f19959c01c68"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN7Sheller14LicenseRequestENS_20LicenseRequestStructE",
+      "start": "0x42730",
+      "end_exclusive": "0x43384",
+      "verified_references": [
+        "send licenseRequest %s to shell.",
+        "SendIpcCommandRpc failed"
+      ],
+      "code_sha256": "594ce524ead1f236772be5548033fbd74bd47a57a1c9433e91f89106705a7036"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy13UpdateSessionEjPKcjPKhj",
+      "start": "0x3a508",
+      "end_exclusive": "0x3b078",
+      "verified_references": [
+        "SignedServiceCertificate",
+        "SignedLicense",
+        "license succeeded",
+        "license failed"
+      ],
+      "code_sha256": "b5f2e71a446c186180ab5efcf2d875a0a38e1276d2e002533a080aa64324e975"
+    },
+    {
+      "file": "libdecrypt.dylib",
+      "symbol": "__ZN7Sheller7LicenseERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE",
+      "start": "0x43384",
+      "end_exclusive": "0x440ac",
+      "verified_references": [
+        "send license %s to shell.",
+        "SendIpcCommandRpc failed",
+        "\"opData\"",
+        "\"errorCode\"",
+        "\"keyInfo\""
+      ],
+      "code_sha256": "aac59be1635719043811834b9da94c939bdf131fd8a89cbbecf987caf6ebf959"
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN14CServerManager14LicenseRequestENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES6_",
+      "start": "0x100041a38",
+      "end_exclusive": "0x100041ee0",
+      "verified_references": [
+        "LicenseRequest %s",
+        "Threadpool"
+      ],
+      "code_sha256": "849004480bfff021d7e52bc90b8777ef088d5bbce1df730f028bad0945cfd248"
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN14CServerManager7LicenseENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES6_",
+      "start": "0x100041ee0",
+      "end_exclusive": "0x1000422c8",
+      "verified_references": [
+        "License %s",
+        "Threadpool"
+      ],
+      "code_sha256": "fb2813f9cb3adacd42e3dae98c307f8afd371485353e96a142458aa88c0e9fe4"
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZNSt3__120__packaged_task_funcINS_6__bindIRZN14CServerManager14LicenseRequestENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES8_E3$_2JEEENS6_ISB_EEFbvEEclEv",
+      "start": "0x100043334",
+      "end_exclusive": "0x100044214",
+      "verified_references": [
+        "CDMHost5Reset",
+        "Proxy7SetHost",
+        "LicenseRequestResult"
+      ],
+      "code_sha256": "6227d55efb15c0d8b0b39181efe0de1d864843e943d8c9bade3b5ac44ecfeec8"
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZNSt3__120__packaged_task_funcINS_6__bindIRZN14CServerManager7LicenseENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES8_E3$_3JEEENS6_ISB_EEFvvEEclEv",
+      "start": "0x100044af8",
+      "end_exclusive": "0x1000452c8",
+      "verified_references": [
+        "CDMHost15IsKeyChangeSync"
+      ],
+      "code_sha256": "0507d638a2bd7de8121f1dd9cb03e894efafe3467bd5b1ae643e0117b10493d9"
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN12cdmDecryptor23InitializeDecryptModuleEv",
+      "start": "0x100055428",
+      "end_exclusive": "0x100055658",
+      "verified_references": [
+        "GetWidevinePath",
+        "_dlopen",
+        "_dlsym",
+        "CreateCdmInstance"
+      ],
+      "code_sha256": "8623e16d56345d43b81c7678fffb6b0e693436a13d0cd37b30fa642cac02f81f"
+    }
+  ],
+  "browser_cdm_shim_target": "native/libdecrypt.dylib",
+  "historical_facts": [
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1509,
+      "time_jst": "20:05:33:483",
+      "fact": "NHK controller prepares the episode playback page"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1519,
+      "time_jst": "20:06:06:706",
+      "fact": "Common parser observes the NHK license URL",
+      "endpoint_without_query": "https://licence.hsk.st.nhk/widevine/license"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1531,
+      "time_jst": "20:06:06:721",
+      "fact": "Common parser again observes the NHK license URL",
+      "endpoint_without_query": "https://licence.hsk.st.nhk/widevine/license"
+    },
+    {
+      "file": "TunePat VideoGo All-In-One.log",
+      "line": 1532,
+      "time_jst": "20:06:07:422",
+      "fact": "Common parser observes the NHK license URL near license response processing",
+      "endpoint_without_query": "https://licence.hsk.st.nhk/widevine/license"
+    },
+    {
+      "file": "native.log",
+      "line": 378,
+      "time_jst": "20:06:06.516",
+      "fact": "Browser-side bridge successfully parses the custom init data in the NHK job"
+    },
+    {
+      "file": "native.log",
+      "line": 385,
+      "time_jst": "20:06:06.542",
+      "fact": "Bridge sees protocol type 4: service certificate request"
+    },
+    {
+      "file": "native.log",
+      "line": 394,
+      "time_jst": "20:06:06.721",
+      "fact": "Bridge receives protocol type 5: service certificate"
+    },
+    {
+      "file": "native.log",
+      "line": 398,
+      "time_jst": "20:06:06.760",
+      "fact": "Bridge sees protocol type 1: license request"
+    },
+    {
+      "file": "native.log",
+      "line": 406,
+      "time_jst": "20:06:07.265",
+      "fact": "Bridge sends license request work to the shell process"
+    },
+    {
+      "file": "native2.log",
+      "line": 47,
+      "time_jst": "20:06:07.265",
+      "fact": "Shell begins handling license request work"
+    },
+    {
+      "file": "native2.log",
+      "line": 67,
+      "time_jst": "20:06:07.348",
+      "fact": "Shell reaches the next license request checkpoint"
+    },
+    {
+      "file": "native.log",
+      "line": 408,
+      "time_jst": "20:06:07.349",
+      "fact": "Bridge delivers the prepared message through the browser host callback"
+    },
+    {
+      "file": "native.log",
+      "line": 409,
+      "time_jst": "20:06:07.422",
+      "fact": "Bridge receives protocol type 2: license response"
+    },
+    {
+      "file": "native.log",
+      "line": 412,
+      "time_jst": "20:06:07.423",
+      "fact": "Bridge sends the license response to the shell process"
+    },
+    {
+      "file": "native2.log",
+      "line": 68,
+      "time_jst": "20:06:07.424",
+      "fact": "Shell receives license-response work"
+    },
+    {
+      "file": "native2.log",
+      "line": 72,
+      "time_jst": "20:06:07.914",
+      "fact": "Shell host receives the CDM key status notification"
+    },
+    {
+      "file": "native2.log",
+      "line": 82,
+      "time_jst": "20:06:09.044",
+      "fact": "Shell reports a license result"
+    },
+    {
+      "file": "native2.log",
+      "line": 83,
+      "time_jst": "20:06:09.044",
+      "fact": "Shell reports readiness for the saved job"
+    },
+    {
+      "file": "native.log",
+      "line": 413,
+      "time_jst": "20:06:09.045",
+      "fact": "Browser-side bridge explicitly records successful license processing"
+    },
+    {
+      "file": "native.log",
+      "line": 416,
+      "time_jst": "20:06:09.046",
+      "fact": "Browser-side host also receives key status notification"
+    },
+    {
+      "file": "com.tunepat.vidicable.video.log",
+      "line": 199,
+      "time_jst": "20:06:10.400",
+      "fact": "Following conversion belongs to the requested NHK episode"
+    }
+  ],
+  "cdm_key_states": {
+    "file": "native2.log",
+    "usable_key_count": 3,
+    "states_without_key_ids": [
+      {
+        "line": 78,
+        "status": 0,
+        "system_code": 0
+      },
+      {
+        "line": 79,
+        "status": 0,
+        "system_code": 0
+      },
+      {
+        "line": 80,
+        "status": 0,
+        "system_code": 0
+      }
+    ]
+  },
+  "license_response_and_success_same_browser_session": true,
+  "protocol_message_types": {
+    "LICENSE_REQUEST": 1,
+    "LICENSE": 2,
+    "SERVICE_CERTIFICATE_REQUEST": 4,
+    "SERVICE_CERTIFICATE": 5
+  },
+  "message_type_note": "These are SignedMessage protobuf types, not the CDM MessageType enum.",
+  "preload_findings": [
+    {
+      "file": "main/preload/nhk/i.js",
+      "source_sha256": "f3029fe4d66e22d65026c11faeaee0a3850e495d9c12eb52f252a6e012d42fbd",
+      "resolver": {
+        "file": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/main/preload/nhk/i.js",
+        "strings": 4534,
+        "rotation": 351,
+        "aliases": 1747,
+        "replacements": 14165
+      },
+      "verified_identifiers": [
+        "MediaKeySession",
+        "generateRequest",
+        "createMediaKeys",
+        "cdm-create-session",
+        "get-custom-init-data",
+        "licenseStatus",
+        "getLicenseStatus",
+        "setLicenseStatus"
+      ],
+      "finding": "Wraps browser EME request generation; CENC init data is passed through an Electron IPC handler before calling the original function.",
+      "limit": "Resolver is a static navigation aid, not a full scope-aware decompiler."
+    },
+    {
+      "file": "main/preload/nhk/p.js",
+      "source_sha256": "22a55254221f338258ec4d00664c2840737d80f95377388f21c52f3b859e299f",
+      "resolver": {
+        "file": "/Users/nakajimayuuki/Library/Application Support/TunePat VideoGo All-In-One/com.tunepat.vidicable.video/main/preload/nhk/p.js",
+        "strings": 735,
+        "rotation": 268,
+        "aliases": 425,
+        "replacements": 2899
+      },
+      "verified_identifiers": [
+        "MediaKeySession",
+        "generateRequest",
+        "createMediaKeys",
+        "cdm-create-session",
+        "get-custom-init-data",
+        "licenseStatus",
+        "getLicenseStatus",
+        "setLicenseStatus"
+      ],
+      "finding": "Wraps browser EME request generation; CENC init data is passed through an Electron IPC handler before calling the original function.",
+      "limit": "Resolver is a static navigation aid, not a full scope-aware decompiler."
+    }
+  ],
+  "main_bytecode": {
+    "sha256": "f57143116c7f61e0f0de14c8ebf7ee51f75b429c909c13ce777a198c2fb2ae57",
+    "identifiers": [
+      {
+        "name": "get-custom-init-data",
+        "first_byte_offset": 4157898
+      },
+      {
+        "name": "cdm-create-session",
+        "first_byte_offset": 5278865
+      },
+      {
+        "name": "hookUrl widevine/getlicense",
+        "first_byte_offset": 4344911
+      },
+      {
+        "name": "uploadData",
+        "first_byte_offset": 4344951
+      },
+      {
+        "name": "onCompleted",
+        "first_byte_offset": 4343787
+      },
+      {
+        "name": "onBeforeSendHeaders",
+        "first_byte_offset": 4346184
+      },
+      {
+        "name": "onHeadersReceived",
+        "first_byte_offset": 4098490
+      },
+      {
+        "name": "interceptRequests",
+        "first_byte_offset": 4346031
+      },
+      {
+        "name": "requestHeaders",
+        "first_byte_offset": 3808985
+      },
+      {
+        "name": "responseHeaders",
+        "first_byte_offset": 4098584
+      },
+      {
+        "name": "replaceHeaders",
+        "first_byte_offset": 4346216
+      },
+      {
+        "name": "/widevine/license",
+        "first_byte_offset": 5041410
+      },
+      {
+        "name": "window.setLicenseStatus(true)",
+        "first_byte_offset": 4345042
+      },
+      {
+        "name": "NHKDL",
+        "first_byte_offset": 3894459
+      },
+      {
+        "name": "NHKVP",
+        "first_byte_offset": 5074662
+      }
+    ],
+    "limit": "Identifier existence and proximity do not establish every executed JS branch."
+  },
+  "custom_init_schema": [
+    "mode",
+    "pssh",
+    "convert_mode"
+  ],
+  "limits": [
+    "The precise NHK HTTP headers, cookies, token derivation and refresh rules were not recovered.",
+    "Three hook log entries do not prove that three distinct HTTP requests were sent.",
+    "No license payload was compared byte-for-byte across IPC boundaries.",
+    "Some native calls are indirect or unresolved statically; successful runtime stage logs provide additional evidence.",
+    "The main V8 bytecode handler for custom init data and network interception is not fully decompiled.",
+    "Reproducing NHK license acquisition in the standalone prototype has not been tested."
+  ]
+}

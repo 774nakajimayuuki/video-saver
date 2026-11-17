@@ -1,0 +1,337 @@
+{
+  "inspection_date_jst": "2026-10-10",
+  "scope": "Static code and embedded schema inspection only; no runtime DRM, license, or frame data extracted.",
+  "source_files": {
+    "libTranscodeDLL.dylib": {
+      "sha256": "e1cfc9c4bd57b9ebaea397002f0b879536f03575b275d7123ecc8b09816858ca",
+      "bytes": 11916496
+    },
+    "wv_shell": {
+      "sha256": "4b774f96ce0748d225b2f518aeccd02f7b832edc6f923d0e25bba21536b7bff1",
+      "bytes": 11450000
+    }
+  },
+  "functions": [
+    {
+      "file": "libTranscodeDLL.dylib",
+      "symbol": "__ZN9transcode7Convert13DecryptSampleEiRNS_15MediaDataBufferES2_",
+      "start": "0x8c18",
+      "end_exclusive": "0x8c94",
+      "sha256": "697d8c988635b4ba37c860dc2ed64b0e24ac5c7b6103be08526452f80eb727d9",
+      "verified_code_references": [
+        "br\tx4"
+      ]
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "symbol": "__ZN9transcode10DecrypterC7DecryptERNS_15MediaDataBufferES2_",
+      "start": "0xedbc",
+      "end_exclusive": "0xf120",
+      "sha256": "ad301f83cfc4bebea87fcfa807e06de9a23238b166f444f30a726142732ecbeb",
+      "verified_code_references": [
+        "SetCipherData",
+        "SendCipherData",
+        "ProcessOutputData"
+      ]
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "symbol": "__ZN9transcode10DecrypterC11ReadMappingERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+      "start": "0x109bc",
+      "end_exclusive": "0x11274",
+      "sha256": "dee1b5d06c9a688906c998815a96f30645ae50d7471e5c6deb081becd29c0710",
+      "verified_code_references": [
+        "ParseFromArray",
+        "MappingClient3Get",
+        "MediaDataBufferC1"
+      ]
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "symbol": "__ZN9transcode10DecrypterC17ProcessOutputDataERNS_15MediaDataBufferES2_",
+      "start": "0xfea8",
+      "end_exclusive": "0x101fc",
+      "sha256": "2e4d4ddc75fff39d343ef0df82299eaee07b415a0950d36b7b107335d139ef7a",
+      "verified_code_references": [
+        "mutex4lock",
+        "mutex6unlock"
+      ]
+    },
+    {
+      "file": "libTranscodeDLL.dylib",
+      "symbol": "__ZNK9transcode11MappingBase11OpenMappingEPKcRiRPc",
+      "start": "0x36bf8",
+      "end_exclusive": "0x36dd4",
+      "sha256": "821a16fd05d807a7ce9a2668253ebba5d95dc1c8b732a8290fcc70b7007f6420",
+      "verified_code_references": [
+        "_shm_open",
+        "_mmap"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy13DecryptSampleERKN9transcode10CipherDataE",
+      "start": "0x100051070",
+      "end_exclusive": "0x100051b28",
+      "sha256": "adea697004dcf5798a624768bee5a5de24840fa72874f80acb3d4677d0e96c8b",
+      "verified_code_references": [
+        "SetInputBuffer",
+        "PushFrameToCache",
+        "DecryptedBlockToPlainData"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy21DecryptAndDecodeFrameERKN3cdm13InputBuffer_2EPNS0_10VideoFrameE",
+      "start": "0x10004e8d4",
+      "end_exclusive": "0x10004ea70",
+      "sha256": "8e43e0859909e2f927051765c542495bf219723bbacb986ca3d4cebf0d1b48a5",
+      "verified_code_references": [
+        "#0x70",
+        "blr\tx8"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy16PushFrameToCacheENSt3__110unique_ptrI12MyVideoFrameNS0_14default_deleteIS2_EEEEN3cdm6StatusEb",
+      "start": "0x100051fe0",
+      "end_exclusive": "0x1000522d8",
+      "sha256": "8308638ecf1c50237c2da163325c29d6570a324bf2d162be4cddca30353916d1",
+      "verified_code_references": [
+        "VideoFrameToPlainData",
+        "SerializeToArray",
+        "Cache4Push"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN30MyContentDecryptionModuleProxy21VideoFrameToPlainDataERNSt3__110unique_ptrI12MyVideoFrameNS0_14default_deleteIS2_EEEE",
+      "start": "0x1000522d8",
+      "end_exclusive": "0x100052568",
+      "sha256": "d894b7db97bea627e4bb58a08eca7b08cd0796e449dc5f4104e29722d00a21a3",
+      "verified_code_references": [
+        "PlainDataC1",
+        "AP4_ConvertTime",
+        "PlainData_FrameInfo"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN7CDMHost8AllocateEj",
+      "start": "0x100045cac",
+      "end_exclusive": "0x100045e20",
+      "sha256": "47c2eb44e09c701876de70d87b21b220e31ba89ffbf0e60f14914720f2997dba",
+      "verified_code_references": [
+        "MappingServer3Get"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "__ZN12cdmDecryptor23InitializeDecryptModuleEv",
+      "start": "0x100055428",
+      "end_exclusive": "0x100055658",
+      "sha256": "8623e16d56345d43b81c7678fffb6b0e693436a13d0cd37b30fa642cac02f81f",
+      "verified_code_references": [
+        "GetWidevinePath",
+        "_dlopen",
+        "_dlsym",
+        "CreateCdmInstance"
+      ]
+    },
+    {
+      "file": "wv_shell",
+      "symbol": "_CreateCdmInstance",
+      "start": "0x100055008",
+      "end_exclusive": "0x10005520c",
+      "sha256": "eb4965beb3d236812b7a61c65502268e27b7ef73a177ddb73927234c2bf114c7",
+      "verified_code_references": [
+        "ContentDecryptionModule_10",
+        "SetHost"
+      ]
+    }
+  ],
+  "embedded_schema": {
+    "symbol": "__ZL51descriptor_table_protodef_decrypt_5fmessage_2eproto",
+    "address": "0x10089f5d0",
+    "selected_messages": [
+      {
+        "name": "DecoderConfig",
+        "fields": [
+          {
+            "name": "profile",
+            "number": 1,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "level",
+            "number": 2,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "width",
+            "number": 3,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "height",
+            "number": 4,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "timescale",
+            "number": 5,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "extra_data",
+            "number": 6,
+            "type": 12,
+            "type_name": ""
+          },
+          {
+            "name": "codec_string",
+            "number": 7,
+            "type": 9,
+            "type_name": ""
+          },
+          {
+            "name": "codec",
+            "number": 8,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "format",
+            "number": 9,
+            "type": 13,
+            "type_name": ""
+          }
+        ]
+      },
+      {
+        "name": "PlainData",
+        "fields": [
+          {
+            "name": "type",
+            "number": 1,
+            "type": 14,
+            "type_name": ".transcode.PlainData.PlainDataType"
+          },
+          {
+            "name": "data_size",
+            "number": 2,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "offset",
+            "number": 10,
+            "type": 13,
+            "type_name": ""
+          },
+          {
+            "name": "width",
+            "number": 3,
+            "type": 5,
+            "type_name": ""
+          },
+          {
+            "name": "height",
+            "number": 4,
+            "type": 5,
+            "type_name": ""
+          },
+          {
+            "name": "y",
+            "number": 5,
+            "type": 11,
+            "type_name": ".transcode.PlainData.FrameInfo"
+          },
+          {
+            "name": "u",
+            "number": 6,
+            "type": 11,
+            "type_name": ".transcode.PlainData.FrameInfo"
+          },
+          {
+            "name": "v",
+            "number": 7,
+            "type": 11,
+            "type_name": ".transcode.PlainData.FrameInfo"
+          },
+          {
+            "name": "pts",
+            "number": 8,
+            "type": 3,
+            "type_name": ""
+          },
+          {
+            "name": "name",
+            "number": 9,
+            "type": 9,
+            "type_name": ""
+          },
+          {
+            "name": "video_format",
+            "number": 11,
+            "type": 13,
+            "type_name": ""
+          }
+        ],
+        "nested": [
+          {
+            "name": "FrameInfo",
+            "fields": [
+              {
+                "name": "plain_offset",
+                "number": 1,
+                "type": 13,
+                "type_name": ""
+              },
+              {
+                "name": "stride",
+                "number": 2,
+                "type": 13,
+                "type_name": ""
+              }
+            ]
+          }
+        ],
+        "enums": [
+          {
+            "name": "PlainDataType",
+            "values": [
+              {
+                "name": "Unkown",
+                "number": 0
+              },
+              {
+                "name": "Sample",
+                "number": 1
+              },
+              {
+                "name": "Frame",
+                "number": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "interpretation": [
+    "A ContentDecryptionModule_10 proxy calls the CDM video decode interface and packages returned frames.",
+    "PlainData carries mapping metadata and frame properties, not the whole pixel buffer as an inline bytes field.",
+    "Mapped data transport uses POSIX shared memory and mmap.",
+    "The receiver parses PlainData, obtains the mapping, and builds MediaDataBuffer for the packet/frame adapter."
+  ],
+  "limits": [
+    "Code paths are statically established; not every branch was observed during the saved job.",
+    "CDM internal algorithms and actual license/session contents were not inspected."
+  ]
+}
