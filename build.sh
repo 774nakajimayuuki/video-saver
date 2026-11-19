@@ -7,7 +7,7 @@ SIGN="VideoSaver Local Signing"
 security find-certificate -c "$SIGN" >/dev/null 2>&1 || SIGN="-"
 APP="$PWD/Video Saver.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Helpers" .build-cache
-swiftc -parse-as-library -target "$(uname -m)-apple-macos14.0" -module-cache-path "$PWD/.build-cache" VideoSaver.swift MP4Plan.swift AudioRecorder.swift LiveRecorder.swift -o "$APP/Contents/MacOS/VideoSaver"
+swiftc -parse-as-library -target "$(uname -m)-apple-macos14.0" -module-cache-path "$PWD/.build-cache" VideoSaver.swift MP4Plan.swift AudioRecorder.swift LiveRecorder.swift R2Uploader.swift InstagramSaver.swift -o "$APP/Contents/MacOS/VideoSaver"
 cp yt-dlp "$APP/Contents/Helpers/yt-dlp"
 chmod +x "$APP/Contents/Helpers/yt-dlp"
 # ffmpeg / ffprobe は tools/ に置けばアプリに同梱する（無ければ Homebrew 等のものを使う）。

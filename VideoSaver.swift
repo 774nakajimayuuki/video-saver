@@ -157,10 +157,11 @@ import AppKit
 
 /// 画面全体。状態はここで持ち、タブを切り替えても保存・録音・ブラウザの状態が消えないようにする。
 struct ContentView: View {
-    enum Tab { case save, live }
+    enum Tab { case save, live, instagram, r2 }
     @StateObject private var saver = Saver()
     @StateObject private var recorder = AudioRecorder()
     @StateObject private var browser = LiveBrowser()
+    @StateObject private var igBrowser = InstagramBrowser()
     @ObservedObject private var live = LiveRecorder.shared
     @State private var tab = Tab.save
 
@@ -175,6 +176,12 @@ struct ContentView: View {
                     Label(on ? "ライブ録画（録画・録音中）" : "ライブ録画", systemImage: on ? "record.circle.fill" : "play.tv")
                 }
                 .tag(Tab.live)
+            InstagramSaveView(browser: igBrowser)
+                .tabItem { Label("Instagram", systemImage: "camera") }
+                .tag(Tab.instagram)
+            R2UploadView(folders: [saver.folder, live.folder])
+                .tabItem { Label("R2", systemImage: "icloud.and.arrow.up") }
+                .tag(Tab.r2)
         }
         .frame(minWidth: 820, minHeight: 740)
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in saver.cancel(); recorder.stop() }
